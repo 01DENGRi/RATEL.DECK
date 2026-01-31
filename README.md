@@ -29,10 +29,10 @@ organized , traceable , reviewable and reproducible
 Demo
 
 ### Live demo : 
-https://example.com/demo
+https://www.youtube.com/watch?v=vCAJ2HFSqaY
 
 ### Walkthrough 
-video: https://example.com/video
+video:
 
 ---
 
