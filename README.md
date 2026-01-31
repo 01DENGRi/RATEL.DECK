@@ -228,6 +228,7 @@ Unauthorized use is strictly prohibited.
 
 RATEL.DECK is licensed under **GNU General Public License v3.0 (GPLv3)**.  
 See the LICENSE file for full details.
+![License: GPLv3](https://img.shields.io/badge/License-GPLv3-blue)
 
 ---
 
