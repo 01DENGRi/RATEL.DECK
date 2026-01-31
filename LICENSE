@@ -1,0 +1,41 @@
+RATEL.DECK — GNU GENERAL PUBLIC LICENSE v3.0
+
+Copyright (c) 2026 Hazem Methenni ( DENGRi)
+
+All rights reserved.
+
+This software, including all associated source code, documentation,
+architectural designs, and operational concepts, is the intellectual
+property of Hazem Methenni and Cyber.Marine.Deck.
+
+RATEL.DECK is provided exclusively for:
+- Authorized security research
+- Red-team operations
+- Penetration testing with explicit permission
+- Controlled laboratory or enterprise environments
+
+ ! Unauthorized use, deployment, modification, redistribution, or
+commercial exploitation of this software, in whole or in part, is strictly
+prohibited without explicit written permission from the owner.
+
+ ! This project is NOT intended for:
+- Illegal activities
+- Unauthorized access
+- Malware distribution
+- Consumer or end-user deployment
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+IN NO EVENT SHALL THE AUTHOR OR MAINTAINERS BE LIABLE FOR ANY CLAIM,
+DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT,
+OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+By using this software, you acknowledge that you understand and agree
+to these terms.
+
+Maintained by:
+Hazem Methenni ( DENGRi)
+Founder  — Cyber.Marine.Deck

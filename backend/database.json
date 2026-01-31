@@ -1,0 +1,96 @@
+[
+  {
+    "id": "CVE-2021-44228",
+    "title": "Log4Shell - Apache Log4j RCE",
+    "description": "Apache Log4j2 JNDI feature allows remote code execution.",
+    "severity": "critical",
+    "cvss": 10,
+    "affectedProducts": [
+      "Apache Log4j 2.x"
+    ],
+    "os": [
+      "Linux",
+      "Windows",
+      "macOS"
+    ],
+    "services": [
+      "HTTP",
+      "LDAP"
+    ],
+    "publishedDate": "2021-12-10",
+    "pocs": [
+      {
+        "name": "kozmer/log4j-shell-poc",
+        "url": "https://github.com/kozmer/log4j-shell-poc",
+        "language": "Python",
+        "stars": 1500
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2021-44228"
+    ]
+  },
+  {
+    "id": "CVE-2025-24893",
+    "title": "xwiki  Platform SolrSearch Remote Code Execution",
+    "description": "\"A critical remote code execution (RCE) vulnerability in the XWiki Platform’s SolrSearch feature allows unauthenticated attackers to execute arbitrary code via crafted requests. This flaw stems from improper neutralization of directives in dynamically evaluated code (‘Eval Injection’) in the SolrSearch macro, which can be triggered by sending malicious input in the HTTP request parameters. The vulnerability impacts the confidentiality, integrity, and availability of affected XWiki installations. Patches are available and administrators are strongly advised to upgrade immediately.\",",
+    "severity": "critical",
+    "cvss": 9.8,
+    "affectedProducts": [
+      "XWiki Platform (versions >=5.3-milestone-2, <15.10.11)",
+      "XWiki Platform (versions >=16.0.0-rc-1, <16.4.1)"
+    ],
+    "publishedDate": "2025-02-20",
+    "os": [
+      "Linux",
+      "Windows",
+      "Other platforms where Java/XWiki runs"
+    ],
+    "services": [
+      "HTTP"
+    ],
+    "pocs": [
+      {
+        "name": "D3Ext/CVE-2025-24893 POC",
+        "url": "https://github.com/D3Ext/CVE-2025-24893",
+        "language": "Python"
+      },
+      {
+        "name": "0xdf htb-editor",
+        "url": "https://0xdf.gitlab.io/2025/12/06/htb-editor.html#",
+        "language": "Python"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-24893"
+    ]
+  },
+  {
+    "id": "CVE-2024-32019",
+    "title": "Netdata Agent ndsudo Untrusted Search Path Local Privilege Escalation",
+    "description": "A high‑severity local privilege escalation vulnerability in the Netdata open‑source observability tool’s `ndsudo` SUID helper allows low‑privileged attackers to execute arbitrary programs with root permissions. The `ndsudo` tool, shipped with affected Netdata Agent versions, is a root‑owned executable that relies on the `PATH` environment variable to locate external commands. Because the search path is attacker‑controlled, this can lead to execution of malicious code and escalation to root privileges. The issue has been addressed in patched releases of Netdata; upgrades are strongly advised.",
+    "severity": "high",
+    "cvss": 8.8,
+    "affectedProducts": [
+      "Netdata Agent (versions >=1.44.0‑60, <1.45.0‑169)",
+      "Netdata Agent (versions >=1.45.0, <1.45.3)"
+    ],
+    "publishedDate": "2024-04-24",
+    "os": [
+      "LInux"
+    ],
+    "services": [
+      "Local system service"
+    ],
+    "pocs": [
+      {
+        "name": "Metasploit exploit module for ndsudo (CVE‑2024‑32019)",
+        "url": "https://github.com/rapid7/metasploit-framework/tree/master/modules/exploits/linux/local/ndsudo_cve_2024_32019",
+        "language": "Ruby"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2024-32019"
+    ]
+  }
+]

