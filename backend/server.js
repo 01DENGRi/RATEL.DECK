@@ -138,7 +138,6 @@ app.post("/saveProfile", (req, res) => {
 
     const filePath = getProfilePath(profileName);
 
-    // IMPORTANT: same behavior as CVE / CheatSheets
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({ error: "NO_DATABASE" });
     }
